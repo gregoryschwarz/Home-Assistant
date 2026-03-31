@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: TBD
 
 Plans:
-- [ ] 01-01: manifest.json, const.py, and __init__.py with async_setup_entry / async_unload_entry skeleton
+- [x] 01-01: manifest.json, const.py, and __init__.py with async_setup_entry / async_unload_entry skeleton
 - [ ] 01-02: config_flow.py with API key input, validation, and secure storage via ConfigEntry.data
 - [ ] 01-03: Conversation agent registration and deregistration tied to config entry lifecycle
 
@@ -119,7 +119,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. HA Scaffold | 0/3 | Not started | - |
+| 1. HA Scaffold | 1/3 | In Progress|  |
 | 2. Conversation Bridge | 0/3 | Not started | - |
 | 3. Claude LLM Integration | 0/3 | Not started | - |
 | 4. Voice Pipeline | 0/1 | Not started | - |
