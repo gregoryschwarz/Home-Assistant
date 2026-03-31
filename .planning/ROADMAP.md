@@ -30,12 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. User can enter and save a Claude API key through the HA config flow UI
   3. Component can be reloaded from the HA UI without restarting Home Assistant
   4. Component appears as a selectable conversation agent in HA Settings > Voice Assistants
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [x] 01-01: manifest.json, const.py, and __init__.py with async_setup_entry / async_unload_entry skeleton
-- [x] 01-02: config_flow.py with API key input, validation, and secure storage via ConfigEntry.data
-- [x] 01-03: Conversation agent registration and deregistration tied to config entry lifecycle
+- [x] 01-01-PLAN.md — manifest.json, const.py, and __init__.py with async_setup_entry / async_unload_entry skeleton
+- [x] 01-02-PLAN.md — config_flow.py with API key input, validation, and secure storage via ConfigEntry.data
+- [x] 01-03-PLAN.md — Conversation agent registration and deregistration tied to config entry lifecycle
 
 ### Phase 2: Conversation Bridge
 **Goal**: Users can issue text commands that control HA entities using local regex rules, with no LLM dependency
@@ -47,12 +47,12 @@ Plans:
   3. The agent replies with a natural language confirmation after each successful action
   4. The agent returns a clear error message when the requested entity is not found or the service is unavailable
   5. A configurable whitelist limits which HA domains (light, switch, climate, media_player) can be controlled
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: HaAiConversationAgent subclassing AbstractConversationAgent with async_process implementation
-- [ ] 02-02: IntentRouter with regex-based local rule matching and hass.services.async_call execution
-- [ ] 02-03: EntityContextBuilder with domain whitelist filtering and entity name resolution
+- [ ] 02-01-PLAN.md — Wire _async_handle_message to IntentRouter: const additions, setup wiring, echo stub removal
+- [ ] 02-02-PLAN.md — IntentRouter with FR+EN regex patterns, hass.services.async_call dispatch, error handling
+- [ ] 02-03-PLAN.md — EntityContextBuilder 3-pass entity resolution, domain whitelist, OptionsFlowHandler
 
 ### Phase 3: Claude LLM Integration
 **Goal**: Ambiguous and complex commands are resolved by Claude, with privacy and security controls active from day one
