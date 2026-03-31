@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 01-ha-scaffold/01-03-PLAN.md
-last_updated: "2026-03-31T11:02:07.249Z"
-last_activity: 2026-03-31 -- Phase 02 execution started
+stopped_at: Completed 02-conversation-bridge/02-02-PLAN.md
+last_updated: "2026-03-31T14:21:59.689Z"
+last_activity: 2026-03-31
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 6
-  completed_plans: 3
+  completed_plans: 4
   percent: 0
 ---
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-30)
 ## Current Position
 
 Phase: 02 (conversation-bridge) — EXECUTING
-Plan: 1 of 3
-Status: Executing Phase 02
-Last activity: 2026-03-31 -- Phase 02 execution started
+Plan: 2 of 3
+Status: Ready to execute
+Last activity: 2026-03-31
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -55,6 +55,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-ha-scaffold P01 | 26 | 2 tasks | 13 files |
 | Phase 01-ha-scaffold P02 | 12 | 2 tasks | 3 files |
 | Phase 01-ha-scaffold P03 | 15 | 2 tasks | 2 files |
+| Phase 02-conversation-bridge P02 | 9 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,8 @@ Recent decisions affecting current work:
 - [Phase 01-ha-scaffold]: API key stored in entry.data (not options): credentials convention, Phase 3 adds validation
 - [Phase 01-ha-scaffold]: AssistantContent, ChatLog, ConversationResult importable from top-level homeassistant.components.conversation (HA 2026.3.4)
 - [Phase 01-ha-scaffold]: _async_handle_message requires ChatLog param for chat_log.async_add_assistant_content_without_tools before returning ConversationResult
+- [Phase 02-conversation-bridge]: SET_TEMP_RE uses r[e\u00e8]gle character class to match both accented and unaccented French input
+- [Phase 02-conversation-bridge]: ServiceRegistry.async_call must be patched at class level in Python 3.14 (instance attribute read-only)
 
 ### Pending Todos
 
@@ -87,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-31T02:28:56.437Z
-Stopped at: Completed 01-ha-scaffold/01-03-PLAN.md
+Last session: 2026-03-31T14:21:59.686Z
+Stopped at: Completed 02-conversation-bridge/02-02-PLAN.md
 Resume file: None

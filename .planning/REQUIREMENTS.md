@@ -15,10 +15,10 @@
 ### Contrôle par langage naturel
 
 - [ ] **NLU-01**: L'utilisateur peut envoyer une commande texte (ex: "allume la lumière du salon") et l'entité correspondante est contrôlée
-- [ ] **NLU-02**: Les commandes simples/fréquentes sont traitées localement (regex/règles) sans appel API Claude
+- [x] **NLU-02**: Les commandes simples/fréquentes sont traitées localement (regex/règles) sans appel API Claude
 - [ ] **NLU-03**: Les commandes ambiguës ou complexes sont envoyées à Claude avec la liste filtrée des entités HA pertinentes
 - [ ] **NLU-04**: L'agent répond avec une confirmation en langage naturel après chaque action
-- [ ] **NLU-05**: L'agent gère les erreurs (entité introuvable, service indisponible) avec un message clair
+- [x] **NLU-05**: L'agent gère les erreurs (entité introuvable, service indisponible) avec un message clair
 
 ### Interface voix
 
@@ -76,10 +76,10 @@
 | HA-03 | Phase 1 | Complete |
 | HA-04 | Phase 1 | Complete |
 | NLU-01 | Phase 2 | Pending |
-| NLU-02 | Phase 2 | Pending |
+| NLU-02 | Phase 2 | Complete |
 | NLU-03 | Phase 3 | Pending |
 | NLU-04 | Phase 2 | Pending |
-| NLU-05 | Phase 2 | Pending |
+| NLU-05 | Phase 2 | Complete |
 | VOICE-01 | Phase 4 | Pending |
 | VOICE-02 | Phase 4 | Pending |
 | HABIT-01 | Phase 5 | Pending |

@@ -50,7 +50,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Wire _async_handle_message to IntentRouter: const additions, setup wiring, echo stub removal
+- [x] 02-01-PLAN.md — Wire _async_handle_message to IntentRouter: const additions, setup wiring, echo stub removal
 - [ ] 02-02-PLAN.md — IntentRouter with FR+EN regex patterns, hass.services.async_call dispatch, error handling
 - [ ] 02-03-PLAN.md — EntityContextBuilder 3-pass entity resolution, domain whitelist, OptionsFlowHandler
 
@@ -120,7 +120,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. HA Scaffold | 3/3 | Complete   | 2026-03-31 |
-| 2. Conversation Bridge | 0/3 | Not started | - |
+| 2. Conversation Bridge | 1/3 | In Progress|  |
 | 3. Claude LLM Integration | 0/3 | Not started | - |
 | 4. Voice Pipeline | 0/1 | Not started | - |
 | 5. Habit Engine | 0/3 | Not started | - |
