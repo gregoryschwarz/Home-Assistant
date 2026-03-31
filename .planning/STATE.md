@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
+status: executing
 stopped_at: Completed 01-ha-scaffold/01-03-PLAN.md
-last_updated: "2026-03-31T02:28:56.440Z"
-last_activity: 2026-03-31
+last_updated: "2026-03-31T11:02:07.249Z"
+last_activity: 2026-03-31 -- Phase 02 execution started
 progress:
   total_phases: 6
   completed_phases: 1
-  total_plans: 3
+  total_plans: 6
   completed_plans: 3
   percent: 0
 ---
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Contrôler et automatiser sa maison en langage naturel sans configuration technique, avec un agent qui s'améliore au fil du temps.
-**Current focus:** Phase 01 — ha-scaffold
+**Current focus:** Phase 02 — conversation-bridge
 
 ## Current Position
 
-Phase: 01 (ha-scaffold) — EXECUTING
-Plan: 3 of 3
-Status: Phase complete — ready for verification
-Last activity: 2026-03-31
+Phase: 02 (conversation-bridge) — EXECUTING
+Plan: 1 of 3
+Status: Executing Phase 02
+Last activity: 2026-03-31 -- Phase 02 execution started
 
 Progress: [░░░░░░░░░░] 0%
 

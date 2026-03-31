@@ -34,21 +34,18 @@ async def test_message_routed_via_intent_router(
     mock_router_instance.async_route = AsyncMock(return_value="OK")
     mock_router_class = MagicMock(return_value=mock_router_instance)
 
-    mock_module = types.ModuleType("custom_components.ha_ai_agent.intent_router")
-    mock_module.IntentRouter = mock_router_class
-
     import sys
-    sys.modules.setdefault("custom_components.ha_ai_agent.intent_router", mock_module)
+    # Unused imports kept for potential future use but module injection removed
+    _ = types, sys
 
-    # Also inject into the package namespace so attribute lookup works
     import custom_components.ha_ai_agent as pkg
     had_attr = hasattr(pkg, "intent_router")
-    if not had_attr:
-        pkg.intent_router = mock_module
 
     try:
+        # Patch where IntentRouter is used (imported name in __init__.py),
+        # not where it is defined — standard Python mock pattern.
         with patch(
-            "custom_components.ha_ai_agent.intent_router.IntentRouter",
+            "custom_components.ha_ai_agent.IntentRouter",
             mock_router_class,
         ):
             await hass.config_entries.async_setup(mock_config_entry.entry_id)

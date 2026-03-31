@@ -31,6 +31,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
+from .intent_router import IntentRouter
 
 
 async def async_setup_entry(
@@ -47,10 +48,9 @@ async def async_setup_entry(
 
 
 class HaAiConversationAgent(ConversationEntity):
-    """HA AI Agent conversation entity — Phase 1 scaffold (echo stub only).
+    """HA AI Agent conversation entity — Phase 2: routes via IntentRouter.
 
-    Phase 2 will replace _async_handle_message with IntentRouter + local rules.
-    Phase 3 will add Claude API fallback.
+    Phase 3 will add Claude API fallback for unrecognized intents.
     """
 
     _attr_has_entity_name = True
@@ -78,23 +78,19 @@ class HaAiConversationAgent(ConversationEntity):
         user_input: ConversationInput,
         chat_log: ChatLog,
     ) -> ConversationResult:
-        """Process a conversation message. Phase 1: echo stub only.
-
-        Phase 2 replaces this body with:
-            intent = await intent_router.async_route(user_input.text, hass)
-            return await intent.async_execute(hass, user_input, chat_log)
-        """
-        response_text = f"[HA AI Agent scaffold] Received: {user_input.text}"
+        """Route message via IntentRouter (Phase 2). Claude fallback added in Phase 3."""
+        router: IntentRouter = self.hass.data[DOMAIN][self._entry.entry_id]["router"]
+        response_text = await router.async_route(
+            text=user_input.text,
+            language=user_input.language,
+        )
 
         # Add assistant response to chat log (required by ConversationEntity API in HA 2024.6+)
-        # Verified: AssistantContent is importable from homeassistant.components.conversation
-        # and accepts (agent_id: str, content: str | None)
         chat_log.async_add_assistant_content_without_tools(
             AssistantContent(agent_id=self.entity_id, content=response_text)
         )
 
         # Build ConversationResult with IntentResponse
-        # IntentResponse(language: str) — confirmed constructor signature
         intent_response = conversation_intent.IntentResponse(language=user_input.language)
         intent_response.async_set_speech(response_text)
 

@@ -10,7 +10,7 @@
 - [x] **HA-01**: Le composant s'installe via le dossier `custom_components/ha_ai_agent/` et apparaît dans l'interface HA
 - [x] **HA-02**: L'utilisateur peut configurer la clé API Claude via le config flow HA (UI)
 - [x] **HA-03**: Le composant peut être rechargé sans redémarrer Home Assistant
-- [ ] **HA-04**: Le composant s'enregistre comme agent de conversation sélectionnable dans les Voice Assistants HA
+- [x] **HA-04**: Le composant s'enregistre comme agent de conversation sélectionnable dans les Voice Assistants HA
 
 ### Contrôle par langage naturel
 
@@ -74,7 +74,7 @@
 | HA-01 | Phase 1 | Complete |
 | HA-02 | Phase 1 | Complete |
 | HA-03 | Phase 1 | Complete |
-| HA-04 | Phase 1 | Pending |
+| HA-04 | Phase 1 | Complete |
 | NLU-01 | Phase 2 | Pending |
 | NLU-02 | Phase 2 | Pending |
 | NLU-03 | Phase 3 | Pending |
