@@ -12,7 +12,7 @@ Six phases that follow a strict dependency chain: HA scaffold first (lifecycle a
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: HA Scaffold** - Custom component loads in HA with secure API key config and clean lifecycle
+- [x] **Phase 1: HA Scaffold** - Custom component loads in HA with secure API key config and clean lifecycle (completed 2026-03-31)
 - [ ] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required
 - [ ] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls
 - [ ] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent
@@ -34,8 +34,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01: manifest.json, const.py, and __init__.py with async_setup_entry / async_unload_entry skeleton
-- [ ] 01-02: config_flow.py with API key input, validation, and secure storage via ConfigEntry.data
-- [ ] 01-03: Conversation agent registration and deregistration tied to config entry lifecycle
+- [x] 01-02: config_flow.py with API key input, validation, and secure storage via ConfigEntry.data
+- [x] 01-03: Conversation agent registration and deregistration tied to config entry lifecycle
 
 ### Phase 2: Conversation Bridge
 **Goal**: Users can issue text commands that control HA entities using local regex rules, with no LLM dependency
@@ -119,7 +119,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. HA Scaffold | 1/3 | In Progress|  |
+| 1. HA Scaffold | 3/3 | Complete   | 2026-03-31 |
 | 2. Conversation Bridge | 0/3 | Not started | - |
 | 3. Claude LLM Integration | 0/3 | Not started | - |
 | 4. Voice Pipeline | 0/1 | Not started | - |
