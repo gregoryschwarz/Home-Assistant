@@ -27,6 +27,17 @@ def hass_config_dir() -> str:
 
 
 @pytest.fixture
+async def hass_with_homeassistant(hass: HomeAssistant, enable_custom_integrations) -> HomeAssistant:
+    """Provide a hass instance with homeassistant core component loaded.
+
+    Required for config flow tests: the conversation dependency needs
+    exposed_entities from the homeassistant core component.
+    """
+    await async_setup_component(hass, "homeassistant", {})
+    return hass
+
+
+@pytest.fixture
 async def mock_config_entry(hass: HomeAssistant, enable_custom_integrations) -> MockConfigEntry:
     """Create and add a mock config entry for ha_ai_agent.
 

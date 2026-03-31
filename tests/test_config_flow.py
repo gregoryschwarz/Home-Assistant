@@ -13,10 +13,10 @@ TEST_API_KEY = "sk-ant-test-key-12345-valid"
 
 
 async def test_flow_user_step_shows_form(
-    hass: HomeAssistant, enable_custom_integrations
+    hass_with_homeassistant: HomeAssistant,
 ) -> None:
     """Initiating user step with no input must show the API key form."""
-    result = await hass.config_entries.flow.async_init(
+    result = await hass_with_homeassistant.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
     assert result["type"] is FlowResultType.FORM
@@ -25,9 +25,10 @@ async def test_flow_user_step_shows_form(
 
 
 async def test_flow_user_step_success(
-    hass: HomeAssistant, enable_custom_integrations
+    hass_with_homeassistant: HomeAssistant,
 ) -> None:
     """Submitting a valid API key must create a config entry with the key in entry.data."""
+    hass = hass_with_homeassistant
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
@@ -41,9 +42,10 @@ async def test_flow_user_step_success(
 
 
 async def test_flow_already_configured(
-    hass: HomeAssistant, enable_custom_integrations
+    hass_with_homeassistant: HomeAssistant,
 ) -> None:
     """A second setup attempt must abort with 'already_configured'."""
+    hass = hass_with_homeassistant
     # Create an existing entry with the same unique_id
     existing = MockConfigEntry(
         domain=DOMAIN,
@@ -64,9 +66,10 @@ async def test_flow_already_configured(
 
 
 async def test_flow_stores_key_in_data_not_options(
-    hass: HomeAssistant, enable_custom_integrations
+    hass_with_homeassistant: HomeAssistant,
 ) -> None:
     """API key MUST be stored in entry.data, not entry.options (security convention)."""
+    hass = hass_with_homeassistant
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
