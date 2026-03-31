@@ -1,0 +1,14 @@
+{
+  "domain": "ha_ai_agent",
+  "name": "HA Autonomous AI Agent",
+  "version": "0.1.0",
+  "documentation": "",
+  "issue_tracker": "",
+  "requirements": ["anthropic>=0.27,<1", "aiosqlite>=0.20"],
+  "dependencies": ["conversation"],
+  "after_dependencies": ["assist_pipeline"],
+  "codeowners": [],
+  "config_flow": true,
+  "iot_class": "cloud_polling",
+  "integration_type": "service"
+}

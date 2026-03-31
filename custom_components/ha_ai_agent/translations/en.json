@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure HA AI Agent",
+        "description": "Enter your Anthropic API key. Your commands will be processed by Claude. Note: backups of your Home Assistant .storage/ folder will contain this key in plain text.",
+        "data": {
+          "api_key": "Anthropic API Key"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to Claude API",
+      "invalid_auth": "Invalid API key"
+    },
+    "abort": {
+      "already_configured": "HA AI Agent is already configured"
+    }
+  }
+}

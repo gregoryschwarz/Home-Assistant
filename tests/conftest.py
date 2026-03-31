@@ -1,16 +1,40 @@
 """Shared fixtures for Phase 1 tests."""
 from __future__ import annotations
 
+import asyncio
+import pathlib
+import sys
+
 import pytest
 from homeassistant.core import HomeAssistant
+from homeassistant.setup import async_setup_component
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.ha_ai_agent.const import CONF_API_KEY, DOMAIN
 
+# Windows: use SelectorEventLoop so pytest-socket does not block internal socket pairs
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+# Project root — parent of the tests/ directory
+PROJECT_ROOT = str(pathlib.Path(__file__).parent.parent)
+
 
 @pytest.fixture
-def mock_config_entry(hass: HomeAssistant) -> MockConfigEntry:
-    """Create and add a mock config entry for ha_ai_agent."""
+def hass_config_dir() -> str:
+    """Override config dir so HA can discover custom_components/ha_ai_agent."""
+    return PROJECT_ROOT
+
+
+@pytest.fixture
+async def mock_config_entry(hass: HomeAssistant, enable_custom_integrations) -> MockConfigEntry:
+    """Create and add a mock config entry for ha_ai_agent.
+
+    Sets up the homeassistant core component first so that the conversation
+    integration can find its exposed_entities data (required by HA 2026.x).
+    """
+    # conversation depends on homeassistant core component being set up
+    await async_setup_component(hass, "homeassistant", {})
     entry = MockConfigEntry(
         domain=DOMAIN,
         data={CONF_API_KEY: "sk-ant-test-key-for-testing"},
