@@ -14,7 +14,7 @@
 
 ### Contrôle par langage naturel
 
-- [ ] **NLU-01**: L'utilisateur peut envoyer une commande texte (ex: "allume la lumière du salon") et l'entité correspondante est contrôlée
+- [x] **NLU-01**: L'utilisateur peut envoyer une commande texte (ex: "allume la lumière du salon") et l'entité correspondante est contrôlée
 - [x] **NLU-02**: Les commandes simples/fréquentes sont traitées localement (regex/règles) sans appel API Claude
 - [ ] **NLU-03**: Les commandes ambiguës ou complexes sont envoyées à Claude avec la liste filtrée des entités HA pertinentes
 - [ ] **NLU-04**: L'agent répond avec une confirmation en langage naturel après chaque action
@@ -36,7 +36,7 @@
 
 - [ ] **SEC-01**: Seule la liste filtrée des entités pertinentes (pas l'état complet de tout HA) est envoyée à l'API Claude
 - [ ] **SEC-02**: Les données d'habitudes restent exclusivement en local (pas de cloud sync)
-- [ ] **SEC-03**: Une whitelist de domaines contrôlables est configurable (light, switch, climate, media_player par défaut)
+- [x] **SEC-03**: Une whitelist de domaines contrôlables est configurable (light, switch, climate, media_player par défaut)
 
 ## v2 Requirements
 
@@ -75,7 +75,7 @@
 | HA-02 | Phase 1 | Complete |
 | HA-03 | Phase 1 | Complete |
 | HA-04 | Phase 1 | Complete |
-| NLU-01 | Phase 2 | Pending |
+| NLU-01 | Phase 2 | Complete |
 | NLU-02 | Phase 2 | Complete |
 | NLU-03 | Phase 3 | Pending |
 | NLU-04 | Phase 2 | Pending |
@@ -88,7 +88,7 @@
 | HABIT-04 | Phase 6 | Pending |
 | SEC-01 | Phase 3 | Pending |
 | SEC-02 | Phase 5 | Pending |
-| SEC-03 | Phase 2 | Pending |
+| SEC-03 | Phase 2 | Complete |
 
 **Coverage:**
 - v1 requirements: 18 total

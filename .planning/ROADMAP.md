@@ -13,7 +13,7 @@ Six phases that follow a strict dependency chain: HA scaffold first (lifecycle a
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: HA Scaffold** - Custom component loads in HA with secure API key config and clean lifecycle (completed 2026-03-31)
-- [ ] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required
+- [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
 - [ ] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls
 - [ ] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent
 - [ ] **Phase 5: Habit Engine** - State changes observed, events stored in crash-safe SQLite, patterns detected
@@ -51,8 +51,8 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — Wire _async_handle_message to IntentRouter: const additions, setup wiring, echo stub removal
-- [ ] 02-02-PLAN.md — IntentRouter with FR+EN regex patterns, hass.services.async_call dispatch, error handling
-- [ ] 02-03-PLAN.md — EntityContextBuilder 3-pass entity resolution, domain whitelist, OptionsFlowHandler
+- [x] 02-02-PLAN.md — IntentRouter with FR+EN regex patterns, hass.services.async_call dispatch, error handling
+- [x] 02-03-PLAN.md — EntityContextBuilder 3-pass entity resolution, domain whitelist, OptionsFlowHandler
 
 ### Phase 3: Claude LLM Integration
 **Goal**: Ambiguous and complex commands are resolved by Claude, with privacy and security controls active from day one
@@ -120,7 +120,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. HA Scaffold | 3/3 | Complete   | 2026-03-31 |
-| 2. Conversation Bridge | 1/3 | In Progress|  |
+| 2. Conversation Bridge | 3/3 | Complete   | 2026-03-31 |
 | 3. Claude LLM Integration | 0/3 | Not started | - |
 | 4. Voice Pipeline | 0/1 | Not started | - |
 | 5. Habit Engine | 0/3 | Not started | - |
