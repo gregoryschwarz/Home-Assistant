@@ -1,7 +1,7 @@
 """Tests for conversation bridge — IntentRouter wiring (NLU-01, NLU-04).
 
 Wave 0: Tests 1-2 are RED until plan 02-01 implementation.
-Tests 3-4 are skipped placeholders for plan 02-02 (entity control).
+Tests 3-4 updated from skip placeholders to real tests in plan 02-03.
 """
 from __future__ import annotations
 
@@ -9,10 +9,11 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from homeassistant.components.conversation import (
+    ChatLog,
     ConversationInput,
     intent as conversation_intent,
 )
-from homeassistant.core import HomeAssistant
+from homeassistant.core import Context, HomeAssistant
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.ha_ai_agent.const import DOMAIN
@@ -115,23 +116,73 @@ async def test_router_stored_in_hass_data(
     )
 
 
-@pytest.mark.skip(reason="Requires IntentRouter entity control — plan 02-02")
 async def test_confirmation_message_after_turn_on(
     hass: HomeAssistant, mock_config_entry: MockConfigEntry
 ) -> None:
-    """After a turn_on command, response must confirm the action was taken.
+    """After a turn_on command, response must confirm the action was taken (NLU-01, NLU-04)."""
+    hass.states.async_set("light.salon", "off")
+    with patch(
+        "custom_components.ha_ai_agent.entity_context.EntityContextBuilder.resolve_entity",
+        return_value="light.salon",
+    ), patch(
+        "homeassistant.core.ServiceRegistry.async_call",
+        new=AsyncMock(return_value=None),
+    ):
+        await hass.config_entries.async_setup(mock_config_entry.entry_id)
+        await hass.async_block_till_done()
+        component = hass.data.get("entity_components", {}).get("conversation")
+        assert component is not None, "conversation component not found in hass.data"
+        agent = next(
+            (e for e in component.entities if DOMAIN in getattr(e, "entity_id", "")),
+            None,
+        )
+        assert agent is not None, "HaAiConversationAgent not found after setup"
 
-    Placeholder for plan 02-02 (entity control via HA services).
-    """
-    pass
+        user_input = ConversationInput(
+            text="allume la lumiere du salon",
+            conversation_id=None,
+            language="fr",
+            agent_id=agent.entity_id,
+            context=Context(),
+        )
+        chat_log = MagicMock()
+        chat_log.async_add_assistant_content_without_tools = MagicMock()
+        result = await agent._async_handle_message(user_input, chat_log)
+        speech = result.response.speech.get("plain", {}).get("speech", "")
+        assert "allumé" in speech.lower() or "d'accord" in speech.lower() or "ok" in speech.lower(), (
+            f"Expected French confirmation, got: {speech!r}"
+        )
 
 
-@pytest.mark.skip(reason="Requires IntentRouter entity resolution — plan 02-02")
 async def test_entity_not_found_returns_error(
     hass: HomeAssistant, mock_config_entry: MockConfigEntry
 ) -> None:
-    """When entity referenced in command is not found, response must indicate error.
+    """When entity referenced in command is not found, response must indicate error (NLU-05)."""
+    with patch(
+        "custom_components.ha_ai_agent.entity_context.EntityContextBuilder.resolve_entity",
+        return_value=None,
+    ):
+        await hass.config_entries.async_setup(mock_config_entry.entry_id)
+        await hass.async_block_till_done()
+        component = hass.data.get("entity_components", {}).get("conversation")
+        assert component is not None, "conversation component not found in hass.data"
+        agent = next(
+            (e for e in component.entities if DOMAIN in getattr(e, "entity_id", "")),
+            None,
+        )
+        assert agent is not None, "HaAiConversationAgent not found after setup"
 
-    Placeholder for plan 02-02 (entity resolution and error handling).
-    """
-    pass
+        user_input = ConversationInput(
+            text="allume la lumiere du salon",
+            conversation_id=None,
+            language="fr",
+            agent_id=agent.entity_id,
+            context=Context(),
+        )
+        chat_log = MagicMock()
+        chat_log.async_add_assistant_content_without_tools = MagicMock()
+        result = await agent._async_handle_message(user_input, chat_log)
+        speech = result.response.speech.get("plain", {}).get("speech", "")
+        assert "introuvable" in speech.lower(), (
+            f"Expected 'introuvable' error message, got: {speech!r}"
+        )
