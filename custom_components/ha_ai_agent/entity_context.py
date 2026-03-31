@@ -10,3 +10,7 @@ class EntityContextBuilder:
     def __init__(self, hass: HomeAssistant, allowed_domains: list[str]) -> None:
         self.hass = hass
         self.allowed_domains = allowed_domains
+
+    def resolve_entity(self, user_entity_text: str) -> str | None:
+        """Return entity_id string or None if not found. Stub until plan 02-03."""
+        return None
