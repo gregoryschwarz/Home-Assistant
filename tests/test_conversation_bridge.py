@@ -144,6 +144,8 @@ async def test_confirmation_message_after_turn_on(
             language="fr",
             agent_id=agent.entity_id,
             context=Context(),
+            device_id=None,
+            satellite_id=None,
         )
         chat_log = MagicMock()
         chat_log.async_add_assistant_content_without_tools = MagicMock()
@@ -178,6 +180,8 @@ async def test_entity_not_found_returns_error(
             language="fr",
             agent_id=agent.entity_id,
             context=Context(),
+            device_id=None,
+            satellite_id=None,
         )
         chat_log = MagicMock()
         chat_log.async_add_assistant_content_without_tools = MagicMock()

@@ -3,9 +3,11 @@ from __future__ import annotations
 
 import voluptuous as vol
 from homeassistant import config_entries
+from homeassistant.config_entries import ConfigEntry, OptionsFlow
+from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 
-from .const import CONF_API_KEY, DOMAIN
+from .const import CONF_API_KEY, CONF_ALLOWED_DOMAINS, DEFAULT_ALLOWED_DOMAINS, DOMAIN
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
@@ -42,4 +44,33 @@ class HaAiAgentConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=STEP_USER_DATA_SCHEMA,
             errors=errors,
+        )
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(config_entry: ConfigEntry) -> "HaAiAgentOptionsFlow":
+        """Return the options flow handler for domain whitelist configuration (SEC-03)."""
+        return HaAiAgentOptionsFlow()
+
+
+class HaAiAgentOptionsFlow(OptionsFlow):
+    """Options flow for domain whitelist configuration (SEC-03)."""
+
+    async def async_step_init(
+        self, user_input: dict | None = None
+    ) -> FlowResult:
+        """Handle domain whitelist options form."""
+        if user_input is not None:
+            return self.async_create_entry(data=user_input)
+        current = self.config_entry.options
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Optional(
+                        CONF_ALLOWED_DOMAINS,
+                        default=current.get(CONF_ALLOWED_DOMAINS, DEFAULT_ALLOWED_DOMAINS),
+                    ): vol.All(list, [str]),
+                }
+            ),
         )
