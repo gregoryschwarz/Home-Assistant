@@ -51,7 +51,6 @@ async def test_turn_on_french(hass: HomeAssistant) -> None:
         result = await router.async_route("allume la lumiere du salon", "fr")
 
     mock_call.assert_awaited_once_with(
-        hass.services,
         domain="light",
         service="turn_on",
         service_data={"entity_id": "light.salon"},
@@ -74,7 +73,6 @@ async def test_turn_off_english(hass: HomeAssistant) -> None:
         result = await router.async_route("turn off the kitchen light", "en")
 
     mock_call.assert_awaited_once_with(
-        hass.services,
         domain="light",
         service="turn_off",
         service_data={"entity_id": "light.kitchen"},
