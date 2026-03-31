@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 01-ha-scaffold/01-02-PLAN.md
-last_updated: "2026-03-31T02:28:40.463Z"
+stopped_at: Completed 01-ha-scaffold/01-03-PLAN.md
+last_updated: "2026-03-31T02:28:56.440Z"
 last_activity: 2026-03-31
 progress:
   total_phases: 6
@@ -72,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 01-ha-scaffold]: Windows asyncio: fcntl/resource stubs + SelectorEventLoop + pytest-socket AF_INET patch required for pytest-homeassistant-custom-component on Windows Python 3.14
 - [Phase 01-ha-scaffold]: HaAiAgentConfigFlow: async_set_unique_id(DOMAIN) + _abort_if_unique_id_configured() prevent duplicate config entries
 - [Phase 01-ha-scaffold]: API key stored in entry.data (not options): credentials convention, Phase 3 adds validation
+- [Phase 01-ha-scaffold]: AssistantContent, ChatLog, ConversationResult importable from top-level homeassistant.components.conversation (HA 2026.3.4)
+- [Phase 01-ha-scaffold]: _async_handle_message requires ChatLog param for chat_log.async_add_assistant_content_without_tools before returning ConversationResult
 
 ### Pending Todos
 
@@ -85,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-31T02:28:31.133Z
-Stopped at: Completed 01-ha-scaffold/01-02-PLAN.md
+Last session: 2026-03-31T02:28:56.437Z
+Stopped at: Completed 01-ha-scaffold/01-03-PLAN.md
 Resume file: None
