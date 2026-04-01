@@ -67,10 +67,11 @@ class IntentRouter:
         self.hass = hass
         self.allowed_domains = allowed_domains
 
-    async def async_route(self, text: str, language: str) -> str:
+    async def async_route(self, text: str, language: str) -> str | None:
         """Match text against compiled patterns, resolve entity, call service.
 
-        Returns a natural language French response string.
+        Returns a natural language French response string, or None if no
+        pattern matched (sentinel for LLM fallback in conversation.py — D-01).
         """
         # Normalize curly apostrophe U+2019 -> ASCII apostrophe before matching
         text_normalized = text.replace("\u2019", "'")
@@ -93,7 +94,7 @@ class IntentRouter:
         if match:
             return await self._dispatch(match.group("entity"), "media_play_pause", None)
 
-        return "Je n'ai pas compris la commande."
+        return None  # D-01: sentinel for LLM fallback in conversation.py
 
     async def _dispatch(
         self,

@@ -115,14 +115,14 @@ async def test_set_temperature(hass: HomeAssistant) -> None:
 
 
 async def test_unrecognized_command_returns_fallback(hass: HomeAssistant) -> None:
-    """Command matching no pattern must return a non-empty string (no exception)."""
+    """Command matching no pattern must return None (sentinel for LLM fallback)."""
     router = make_router(hass)
-    result = await router.async_route("joue de la guitare", "fr")
+    # Use a phrase that truly does not match any compiled regex pattern
+    result = await router.async_route("mets l'ambiance pour un film", "fr")
 
-    assert isinstance(result, str), (
-        f"Expected str fallback, got {type(result)}"
+    assert result is None, (
+        f"Expected None sentinel for LLM fallback, got {result!r}"
     )
-    assert len(result) > 0, "Fallback response must be non-empty"
 
 
 async def test_service_not_found_returns_error(hass: HomeAssistant) -> None:
