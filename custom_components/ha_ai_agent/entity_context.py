@@ -73,3 +73,36 @@ class EntityContextBuilder:
             normalized,
         )
         return None
+
+    def list_entities_for_llm(self, text: str, limit: int = 50) -> list[dict]:
+        """Return filtered entity list for Claude API context (SEC-01, D-13/D-14/D-15).
+
+        Returns list of {entity_id, friendly_name, state} dicts.
+        Only entities in self.allowed_domains. Capped at `limit`.
+        When over limit, prioritizes entities whose friendly_name shares tokens with text.
+        """
+        registry = er.async_get(self.hass)
+        entities: list[dict] = []
+
+        for entry in registry.entities.values():
+            if entry.domain not in self.allowed_domains:
+                continue
+            state_obj = self.hass.states.get(entry.entity_id)
+            entities.append({
+                "entity_id": entry.entity_id,
+                "friendly_name": entry.name or entry.original_name or entry.entity_id,
+                "state": state_obj.state if state_obj else "unknown",
+            })
+
+        if len(entities) <= limit:
+            return entities
+
+        # D-15: prioritize entities whose friendly_name shares tokens with command text
+        command_tokens = set(_normalize(text).split("_")) if text.strip() else set()
+
+        def _score(entity: dict) -> int:
+            name_tokens = set(_normalize(entity["friendly_name"]).split("_"))
+            return len(name_tokens & command_tokens)
+
+        entities.sort(key=_score, reverse=True)
+        return entities[:limit]

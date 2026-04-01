@@ -97,3 +97,96 @@ async def test_alias_match(hass: HomeAssistant, mock_config_entry: MockConfigEnt
     assert result == entry.entity_id, (
         f"Pass 3 alias match failed: expected {entry.entity_id!r}, got {result!r}"
     )
+
+
+# --- Tests for list_entities_for_llm (Phase 3, SEC-01/SEC-02) ---
+
+async def test_list_entities_for_llm_filters_domains(
+    hass: HomeAssistant, mock_config_entry: MockConfigEntry
+) -> None:
+    """SEC-01: Only entities from allowed_domains are returned."""
+    registry = er.async_get(hass)
+    # light domain — allowed
+    light_entry = registry.async_get_or_create(
+        "light", "test", "uid_light", original_name="Salon Light"
+    )
+    hass.states.async_set(light_entry.entity_id, "on")
+    # camera domain — NOT allowed
+    cam_entry = registry.async_get_or_create(
+        "camera", "test", "uid_cam", original_name="Front Camera"
+    )
+    hass.states.async_set(cam_entry.entity_id, "idle")
+
+    ec = EntityContextBuilder(hass, allowed_domains=["light", "switch"])
+    result = ec.list_entities_for_llm("allume la lumiere")
+
+    entity_ids = [e["entity_id"] for e in result]
+    assert light_entry.entity_id in entity_ids
+    assert cam_entry.entity_id not in entity_ids
+
+
+async def test_list_entities_for_llm_minimal_fields(
+    hass: HomeAssistant, mock_config_entry: MockConfigEntry
+) -> None:
+    """SEC-01/D-14: Each entity dict has exactly entity_id, friendly_name, state."""
+    registry = er.async_get(hass)
+    entry = registry.async_get_or_create(
+        "light", "test", "uid_fields", original_name="Bureau"
+    )
+    hass.states.async_set(entry.entity_id, "off")
+
+    ec = EntityContextBuilder(hass, allowed_domains=["light"])
+    result = ec.list_entities_for_llm("test")
+
+    assert len(result) >= 1
+    for entity in result:
+        assert set(entity.keys()) == {"entity_id", "friendly_name", "state"}, (
+            f"Expected exactly 3 keys, got {set(entity.keys())}"
+        )
+
+
+async def test_list_entities_for_llm_cap_at_50(
+    hass: HomeAssistant, mock_config_entry: MockConfigEntry
+) -> None:
+    """D-13: Result is capped at 50 entities even if more exist."""
+    registry = er.async_get(hass)
+    for i in range(60):
+        entry = registry.async_get_or_create(
+            "light", "test", f"uid_cap_{i}", original_name=f"Light {i}"
+        )
+        hass.states.async_set(entry.entity_id, "on")
+
+    ec = EntityContextBuilder(hass, allowed_domains=["light"])
+    result = ec.list_entities_for_llm("test")
+
+    assert len(result) <= 50, f"Expected max 50, got {len(result)}"
+
+
+async def test_list_entities_for_llm_prioritizes_matching(
+    hass: HomeAssistant, mock_config_entry: MockConfigEntry
+) -> None:
+    """D-15: When capped, entities matching command tokens come first."""
+    registry = er.async_get(hass)
+    # Create 55 generic entities
+    for i in range(55):
+        entry = registry.async_get_or_create(
+            "light", "test", f"uid_prio_{i}", original_name=f"Generic Light {i}"
+        )
+        hass.states.async_set(entry.entity_id, "on")
+    # Create one with a matching name
+    match_entry = registry.async_get_or_create(
+        "light", "test", "uid_salon_match", original_name="Lumiere Salon"
+    )
+    hass.states.async_set(match_entry.entity_id, "off")
+
+    ec = EntityContextBuilder(hass, allowed_domains=["light"])
+    result = ec.list_entities_for_llm("salon")
+
+    # The salon entity should be in the top results (within the 50 cap)
+    entity_ids = [e["entity_id"] for e in result]
+    assert match_entry.entity_id in entity_ids, (
+        "Matching entity 'Lumiere Salon' should be prioritized for command 'salon'"
+    )
+    # And it should be near the top (first few entries)
+    idx = entity_ids.index(match_entry.entity_id)
+    assert idx < 5, f"Expected matching entity in top 5, found at index {idx}"
