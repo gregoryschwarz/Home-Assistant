@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-04-01T11:17:04.069Z",
+  "phase": "03",
+  "phase_name": "claude-llm-integration",
+  "phase_dir": ".planning/phases/03-claude-llm-integration",
+  "plan": 3,
+  "task": "human-uat",
+  "total_tasks": "human-uat",
+  "status": "awaiting_human_verification",
+  "completed_tasks": [
+    {"id": "03-01", "name": "ClaudeClient async wrapper + lifecycle wiring", "status": "done", "commit": "baffab6"},
+    {"id": "03-03", "name": "EntityContextBuilder.list_entities_for_llm", "status": "done", "commit": "a9dc698"},
+    {"id": "03-02", "name": "IntentRouter None sentinel + conversation.py LLM fallback", "status": "done", "commit": "75f7a8f"},
+    {"id": "verification", "name": "Automated verification 10/10 + UAT file creation", "status": "done", "commit": "d950ba4"}
+  ],
+  "remaining_tasks": [
+    {"id": "human-uat-1", "name": "Test commande complexe sur HA réel", "status": "not_started"},
+    {"id": "human-uat-2", "name": "Vérifier payload filtrage (logs DEBUG)", "status": "not_started"},
+    {"id": "human-uat-3", "name": "Tester fallback 401 clé invalide", "status": "not_started"},
+    {"id": "human-uat-4", "name": "Inspecter trafic réseau sortant", "status": "not_started"},
+    {"id": "update-roadmap", "name": "Marquer phase 3 complète + PROJECT.md", "status": "blocked_on_human_uat"}
+  ],
+  "blockers": [
+    {"description": "Vérification humaine sur instance HA réelle requise avant de marquer la phase complète", "type": "human_action", "workaround": "Répondre 'approved' si tests OK, ou signaler problèmes pour gap closure"}
+  ],
+  "human_actions_pending": [
+    {"action": "Tester les 4 items dans 03-HUMAN-UAT.md sur instance HA réelle avec vraie clé API Claude", "context": "10/10 automated checks passed, human testing required for live HA interaction", "blocking": true}
+  ],
+  "decisions": [
+    {"decision": "AsyncAnthropic timeout=10.0, max_retries=0", "rationale": "Contrôle exact du retry via boucle manuelle (D-04/D-07)", "phase": "03"},
+    {"decision": "Historique texte uniquement (pas de blocs content bruts)", "rationale": "Évite conflit tool_use/tool_result sur tours suivants", "phase": "03"},
+    {"decision": "async_route retourne None sentinel", "rationale": "Conversation.py contrôle le wording du fallback, router reste stateless", "phase": "03"},
+    {"decision": "Test input 'mets l ambiance pour un film' au lieu de 'joue de la guitare'", "rationale": "'joue' correspond à MEDIA_RE — input non représentatif du cas LLM fallback", "phase": "03"}
+  ],
+  "uncommitted_files": [],
+  "next_action": "Tester sur instance HA réelle les 4 items dans 03-HUMAN-UAT.md. Répondre 'approved' pour déclencher mise à jour ROADMAP et passage Phase 4.",
+  "context_notes": "Phase 3 code-complete. 3 plans exécutés en 2 vagues (worktrees isolés, merge dans master). Vérification auto 10/10. Bloqué uniquement sur approbation humaine UAT avant de marquer phase complète."
+}
