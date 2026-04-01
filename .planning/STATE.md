@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03-claude-llm-integration/03-01-PLAN.md
-last_updated: "2026-04-01T11:01:53.415Z"
+status: verifying
+stopped_at: Completed 03-claude-llm-integration/03-02-PLAN.md
+last_updated: "2026-04-01T11:07:04.909Z"
 last_activity: 2026-04-01
 progress:
   total_phases: 6
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
   percent: 0
 ---
 
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-03-30)
 
 Phase: 03 (claude-llm-integration) — EXECUTING
 Plan: 3 of 3
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-04-01
 
 Progress: [░░░░░░░░░░] 0%
@@ -59,6 +59,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02-conversation-bridge P03 | 10 | 2 tasks | 4 files |
 | Phase 03-claude-llm-integration P03 | 15 | 1 tasks | 2 files |
 | Phase 03-claude-llm-integration P01 | 3min | 2 tasks | 4 files |
+| Phase 03-claude-llm-integration P02 | 2min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,8 @@ Recent decisions affecting current work:
 - [Phase 03-claude-llm-integration]: LLM entity payload fixed at {entity_id, friendly_name, state} — minimal surface for SEC-02 privacy, registry-first name lookup
 - [Phase 03-claude-llm-integration]: AsyncAnthropic initialized with timeout=10.0 (D-07) and max_retries=0 (D-04) for exact retry control via manual loop
 - [Phase 03-claude-llm-integration]: History stores text-only strings to avoid tool_use block / tool_result mismatch on next turn
+- [Phase 03-claude-llm-integration]: async_route returns None sentinel so conversation.py controls fallback wording — keeps router stateless
+- [Phase 03-claude-llm-integration]: Test input changed from 'joue de la guitare' to 'mets l ambiance pour un film' — joue matches MEDIA_RE
 
 ### Pending Todos
 
@@ -99,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-01T11:01:53.412Z
-Stopped at: Completed 03-claude-llm-integration/03-01-PLAN.md
+Last session: 2026-04-01T11:07:04.906Z
+Stopped at: Completed 03-claude-llm-integration/03-02-PLAN.md
 Resume file: None
