@@ -85,6 +85,16 @@ class HaAiConversationAgent(ConversationEntity):
             language=user_input.language,
         )
 
+        if response_text is None:
+            # D-02: LLM fallback — IntentRouter found no regex match
+            claude_client = self.hass.data[DOMAIN][self._entry.entry_id]["claude_client"]
+            entity_context = self.hass.data[DOMAIN][self._entry.entry_id]["entity_context"]
+            entities = entity_context.list_entities_for_llm(user_input.text)
+            response_text = await claude_client.async_complete(user_input.text, entities)
+            # D-03: if Claude also returns None, final fallback
+            if response_text is None:
+                response_text = "Je n'ai pas compris la commande."
+
         # Add assistant response to chat log (required by ConversationEntity API in HA 2024.6+)
         chat_log.async_add_assistant_content_without_tools(
             AssistantContent(agent_id=self.entity_id, content=response_text)
