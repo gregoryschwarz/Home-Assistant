@@ -68,7 +68,7 @@ Plans:
 Plans:
 - [ ] 03-01: ClaudeClient async wrapper with AsyncAnthropic, system prompt, conversation history window, and retry logic
 - [ ] 03-02: IntentRouter LLM fallback branch with tool_use schema for HA service calls and structured output validation
-- [ ] 03-03: EntityContextBuilder filtering (domain/area/count cap at 50) and privacy disclosure in config flow
+- [x] 03-03: EntityContextBuilder filtering (domain/area/count cap at 50) and privacy disclosure in config flow
 
 ### Phase 4: Voice Pipeline
 **Goal**: Voice commands flow end-to-end from wake word through STT to entity action and back as TTS audio
@@ -121,7 +121,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. HA Scaffold | 3/3 | Complete   | 2026-03-31 |
 | 2. Conversation Bridge | 3/3 | Complete   | 2026-03-31 |
-| 3. Claude LLM Integration | 0/3 | Not started | - |
+| 3. Claude LLM Integration | 1/3 | In Progress|  |
 | 4. Voice Pipeline | 0/1 | Not started | - |
 | 5. Habit Engine | 0/3 | Not started | - |
 | 6. Habit Feedback Loop | 0/2 | Not started | - |

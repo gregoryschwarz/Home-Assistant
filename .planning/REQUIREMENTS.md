@@ -34,8 +34,8 @@
 
 ### Sécurité et vie privée
 
-- [ ] **SEC-01**: Seule la liste filtrée des entités pertinentes (pas l'état complet de tout HA) est envoyée à l'API Claude
-- [ ] **SEC-02**: Les données d'habitudes restent exclusivement en local (pas de cloud sync)
+- [x] **SEC-01**: Seule la liste filtrée des entités pertinentes (pas l'état complet de tout HA) est envoyée à l'API Claude
+- [x] **SEC-02**: Les données d'habitudes restent exclusivement en local (pas de cloud sync)
 - [x] **SEC-03**: Une whitelist de domaines contrôlables est configurable (light, switch, climate, media_player par défaut)
 
 ## v2 Requirements
@@ -86,8 +86,8 @@
 | HABIT-02 | Phase 5 | Pending |
 | HABIT-03 | Phase 5 | Pending |
 | HABIT-04 | Phase 6 | Pending |
-| SEC-01 | Phase 3 | Pending |
-| SEC-02 | Phase 5 | Pending |
+| SEC-01 | Phase 3 | Complete |
+| SEC-02 | Phase 5 | Complete |
 | SEC-03 | Phase 2 | Complete |
 
 **Coverage:**

@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-conversation-bridge/02-03-PLAN.md
-last_updated: "2026-03-31T14:39:51.140Z"
-last_activity: 2026-03-31
+stopped_at: Completed 03-claude-llm-integration/03-03-PLAN.md
+last_updated: "2026-04-01T11:00:33.955Z"
+last_activity: 2026-04-01
 progress:
   total_phases: 6
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 9
+  completed_plans: 7
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Contrôler et automatiser sa maison en langage naturel sans configuration technique, avec un agent qui s'améliore au fil du temps.
-**Current focus:** Phase 02 — conversation-bridge
+**Current focus:** Phase 03 — claude-llm-integration
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
+Phase: 03 (claude-llm-integration) — EXECUTING
+Plan: 2 of 3
 Status: Ready to execute
-Last activity: 2026-03-31
+Last activity: 2026-04-01
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -57,6 +57,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-ha-scaffold P03 | 15 | 2 tasks | 2 files |
 | Phase 02-conversation-bridge P02 | 9 | 2 tasks | 3 files |
 | Phase 02-conversation-bridge P03 | 10 | 2 tasks | 4 files |
+| Phase 03-claude-llm-integration P03 | 15 | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,8 @@ Recent decisions affecting current work:
 - [Phase 02-conversation-bridge]: ServiceRegistry.async_call must be patched at class level in Python 3.14 (instance attribute read-only)
 - [Phase 02-conversation-bridge]: 3-pass entity resolution: slug first (O(1)), registry name second, alias third — optimized for common case
 - [Phase 02-conversation-bridge]: ConversationInput HA 2026.x requires device_id and satellite_id positional args — tests must include both as None
+- [Phase 03-claude-llm-integration]: list_entities_for_llm reuses _normalize for token scoring: consistent accent/article stripping between resolve_entity and LLM context
+- [Phase 03-claude-llm-integration]: LLM entity payload fixed at {entity_id, friendly_name, state} — minimal surface for SEC-02 privacy, registry-first name lookup
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-31T14:32:12.721Z
-Stopped at: Completed 02-conversation-bridge/02-03-PLAN.md
+Last session: 2026-04-01T11:00:33.951Z
+Stopped at: Completed 03-claude-llm-integration/03-03-PLAN.md
 Resume file: None
