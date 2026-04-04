@@ -13,8 +13,8 @@ Six phases that follow a strict dependency chain: HA scaffold first (lifecycle a
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: HA Scaffold** - Custom component loads in HA with secure API key config and clean lifecycle (completed 2026-03-31)
-- [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
-- [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
+- [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
+- [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
 - [ ] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent
 - [ ] **Phase 5: Habit Engine** - State changes observed, events stored in crash-safe SQLite, patterns detected
 - [ ] **Phase 6: Habit Feedback Loop** - Habit context enriches Claude responses and surfaces proactive suggestions
@@ -77,11 +77,10 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Saying a wake word followed by a voice command controls the correct HA entity
   2. The agent's text response is read aloud via HA's TTS engine after each voice command
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 04-01: assist_pipeline configuration to select the registered conversation agent as backend, plus STT (Wyoming/Whisper) and TTS (Piper) setup and validation
-**UI hint**: yes
+- [ ] 04-01-PLAN.md — Unit tests for pipeline discoverability (VOICE-01) and TTS speech output (VOICE-02), plus human checkpoint for HA UI pipeline configuration and end-to-end verification
 
 ### Phase 5: Habit Engine
 **Goal**: The component observes and persists home state change events in a crash-safe local database ready for pattern analysis
