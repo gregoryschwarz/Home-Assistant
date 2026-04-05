@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-04-05T10:26:06.590Z"
+stopped_at: Completed 05-habit-engine/05-01-PLAN.md
+last_updated: "2026-04-05T14:28:52.517Z"
 last_activity: 2026-04-05
 progress:
   total_phases: 6
-  completed_phases: 4
-  total_plans: 10
+  completed_phases: 3
+  total_plans: 9
   completed_plans: 10
   percent: 0
 ---
@@ -21,12 +21,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Contrôler et automatiser sa maison en langage naturel sans configuration technique, avec un agent qui s'améliore au fil du temps.
-**Current focus:** Phase 04 — voice-pipeline
+**Current focus:** Phase 03 — claude-llm-integration
 
 ## Current Position
 
-Phase: 5
-Plan: Not started
+Phase: 03 (claude-llm-integration) — EXECUTING
+Plan: 3 of 3
 Status: Phase complete — ready for verification
 Last activity: 2026-04-05
 
@@ -60,8 +60,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 03-claude-llm-integration P03 | 15 | 1 tasks | 2 files |
 | Phase 03-claude-llm-integration P01 | 3min | 2 tasks | 4 files |
 | Phase 03-claude-llm-integration P02 | 2min | 2 tasks | 3 files |
-| Phase 04-voice-pipeline P01 | 3min | 1 tasks | 2 files |
-| Phase 04-voice-pipeline P01 | 35min | 2 tasks | 2 files |
+| Phase 05-habit-engine P01 | 3 | 1 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -91,10 +90,9 @@ Recent decisions affecting current work:
 - [Phase 03-claude-llm-integration]: History stores text-only strings to avoid tool_use block / tool_result mismatch on next turn
 - [Phase 03-claude-llm-integration]: async_route returns None sentinel so conversation.py controls fallback wording — keeps router stateless
 - [Phase 03-claude-llm-integration]: Test input changed from 'joue de la guitare' to 'mets l ambiance pour un film' — joue matches MEDIA_RE
-- [Phase 04-voice-pipeline]: No new component code needed for Phase 4: HaAiConversationAgent already pipeline-compatible via async_set_speech and IntentResponse
-- [Phase 04-voice-pipeline]: IntentRouter.async_route patched at module level (not __init__) for voice pipeline tests — avoids module injection complexity
-- [Phase 04-voice-pipeline]: No new Python code needed for Phase 4: HaAiConversationAgent already pipeline-compatible via async_set_speech and IntentResponse
-- [Phase 04-voice-pipeline]: IntentRouter.async_route patched at module level (not __init__) for voice pipeline tests — avoids module injection complexity
+- [Phase 05-habit-engine]: AgentStorage.__new__ + _db_path injection: allows tests to bypass hass dependency without mock
+- [Phase 05-habit-engine]: async_enforce_cap called inside async_record_event: FIFO cap enforced atomically after every insert
+- [Phase 05-habit-engine]: WAL mode activated in async_open on every reconnection per SQLite persistence docs
 
 ### Pending Todos
 
@@ -108,6 +106,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-05T09:11:23.577Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-04-05T14:28:52.513Z
+Stopped at: Completed 05-habit-engine/05-01-PLAN.md
 Resume file: None

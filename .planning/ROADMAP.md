@@ -13,9 +13,9 @@ Six phases that follow a strict dependency chain: HA scaffold first (lifecycle a
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: HA Scaffold** - Custom component loads in HA with secure API key config and clean lifecycle (completed 2026-03-31)
-- [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
-- [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
-- [x] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent (completed 2026-04-05)
+- [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
+- [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
+- [ ] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent
 - [ ] **Phase 5: Habit Engine** - State changes observed, events stored in crash-safe SQLite, patterns detected
 - [ ] **Phase 6: Habit Feedback Loop** - Habit context enriches Claude responses and surfaces proactive suggestions
 
@@ -63,7 +63,7 @@ Plans:
   2. Only the filtered list of relevant entities (not all HA states) is sent to the Claude API
   3. Claude API failures fall back gracefully to local rules with a clear user-facing message
   4. Raw habit data and full entity state dumps never leave the local network to Anthropic
-**Plans**: 3 plans
+**Plans**: TBD
 
 Plans:
 - [x] 03-01: ClaudeClient async wrapper with AsyncAnthropic, system prompt, conversation history window, and retry logic
@@ -77,10 +77,11 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Saying a wake word followed by a voice command controls the correct HA entity
   2. The agent's text response is read aloud via HA's TTS engine after each voice command
-**Plans**: 1 plan
+**Plans**: TBD
 
 Plans:
-- [x] 04-01-PLAN.md — Unit tests for pipeline discoverability (VOICE-01) and TTS speech output (VOICE-02), plus human checkpoint for HA UI pipeline configuration and end-to-end verification
+- [ ] 04-01: assist_pipeline configuration to select the registered conversation agent as backend, plus STT (Wyoming/Whisper) and TTS (Piper) setup and validation
+**UI hint**: yes
 
 ### Phase 5: Habit Engine
 **Goal**: The component observes and persists home state change events in a crash-safe local database ready for pattern analysis
@@ -91,12 +92,12 @@ Plans:
   2. Each event record includes entity ID, action, timestamp, day of week, and available context (presence, weather)
   3. After sufficient data accumulates, the pattern detector identifies recurring routines (e.g., kitchen lights on at 7 AM on weekdays)
   4. Habit data never leaves the device — no sync, no cloud, no external write
-**Plans**: 3 plans
+**Plans**: TBD
 
 Plans:
-- [ ] 05-01-PLAN.md — AgentStorage with aiosqlite, WAL mode, schema versioning (meta table), TTL purge, and 10,000-event cap
-- [ ] 05-02-PLAN.md — HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
-- [ ] 05-03-PLAN.md — Pattern detection algorithm (time-series frequency analysis over events table) and patterns table storage
+- [x] 05-01: AgentStorage with aiosqlite, WAL mode, schema versioning (meta table), TTL purge, and 10,000-event cap
+- [ ] 05-02: HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
+- [ ] 05-03: Pattern detection algorithm (time-series frequency analysis over events table) and patterns table storage
 
 ### Phase 6: Habit Feedback Loop
 **Goal**: Detected habits enrich Claude's context and surface as actionable suggestions in HA notifications
@@ -105,7 +106,7 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Claude's responses reflect known user routines (e.g., "I see you usually turn on the kitchen lights at 7 AM — done")
   2. Detected habit patterns appear as persistent notifications in HA suggesting automations or routines
-**Plans**: 3 plans
+**Plans**: TBD
 
 Plans:
 - [ ] 06-01: Habit context injection into ClaudeClient system prompt (relevant habits keyed by time/entity)
@@ -121,6 +122,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. HA Scaffold | 3/3 | Complete   | 2026-03-31 |
 | 2. Conversation Bridge | 3/3 | Complete   | 2026-03-31 |
 | 3. Claude LLM Integration | 3/3 | Complete   | 2026-04-01 |
-| 4. Voice Pipeline | 1/1 | Complete   | 2026-04-05 |
-| 5. Habit Engine | 0/3 | Not started | - |
+| 4. Voice Pipeline | 0/1 | Not started | - |
+| 5. Habit Engine | 1/3 | In progress | - |
 | 6. Habit Feedback Loop | 0/2 | Not started | - |

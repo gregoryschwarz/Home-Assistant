@@ -22,13 +22,13 @@
 
 ### Interface voix
 
-- [x] **VOICE-01**: Les commandes vocales via le pipeline `assist_pipeline` de HA sont traitées par le composant
-- [x] **VOICE-02**: La réponse textuelle de l'agent est transmise au moteur TTS de HA pour lecture audio
+- [ ] **VOICE-01**: Les commandes vocales via le pipeline `assist_pipeline` de HA sont traitées par le composant
+- [ ] **VOICE-02**: La réponse textuelle de l'agent est transmise au moteur TTS de HA pour lecture audio
 
 ### Apprentissage des habitudes
 
-- [ ] **HABIT-01**: Le composant écoute les changements d'état HA et stocke les événements en base SQLite locale
-- [ ] **HABIT-02**: Les données collectées contiennent : entité, action, heure, jour de semaine, contexte (présence, météo si disponible)
+- [x] **HABIT-01**: Le composant écoute les changements d'état HA et stocke les événements en base SQLite locale
+- [x] **HABIT-02**: Les données collectées contiennent : entité, action, heure, jour de semaine, contexte (présence, météo si disponible)
 - [ ] **HABIT-03**: Le moteur de patterns détecte les habitudes récurrentes (ex: "allume la cuisine tous les matins à 7h")
 - [ ] **HABIT-04**: Les habitudes détectées enrichissent le contexte envoyé à Claude pour des réponses plus pertinentes
 
@@ -80,10 +80,10 @@
 | NLU-03 | Phase 3 | Complete |
 | NLU-04 | Phase 2 | Complete |
 | NLU-05 | Phase 2 | Complete |
-| VOICE-01 | Phase 4 | Complete |
-| VOICE-02 | Phase 4 | Complete |
-| HABIT-01 | Phase 5 | Pending |
-| HABIT-02 | Phase 5 | Pending |
+| VOICE-01 | Phase 4 | Pending |
+| VOICE-02 | Phase 4 | Pending |
+| HABIT-01 | Phase 5 | Complete |
+| HABIT-02 | Phase 5 | Complete |
 | HABIT-03 | Phase 5 | Pending |
 | HABIT-04 | Phase 6 | Pending |
 | SEC-01 | Phase 3 | Complete |
