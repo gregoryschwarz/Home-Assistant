@@ -20,11 +20,11 @@ Permettre de contrôler et d'automatiser sa maison en langage naturel sans confi
 
 - [x] Commandes vocales pour contrôler les entités Home Assistant via pipeline assist_pipeline — Validé en Phase 4 (VOICE-01, VOICE-02)
 - [x] Observation et persistance des événements home en SQLite local — Validé en Phase 5 (HABIT-01, HABIT-02, HABIT-03, SEC-02)
-- [ ] Apprentissage des habitudes : l'agent observe et mémorise les routines pour les suggérer ou les appliquer automatiquement
-- [ ] Intégration comme custom component HA (dossier `custom_components/`)
-- [ ] Utilisation de l'API Claude (Anthropic) pour l'interprétation des intentions complexes
-- [ ] Combinaison règles locales + LLM : règles pour les cas simples/fréquents, Claude pour les situations ambiguës
-- [ ] Interface vocale et textuelle dans Home Assistant
+- [x] Apprentissage des habitudes : l'agent observe, mémorise et injecte les routines dans le contexte Claude + notifie via persistent_notification — Validé en Phase 6 (HABIT-04)
+- [x] Intégration comme custom component HA (dossier `custom_components/`) — Validé en Phase 1 (HA-01/02/03/04)
+- [x] Utilisation de l'API Claude (Anthropic) pour l'interprétation des intentions complexes — Validé en Phase 3
+- [x] Combinaison règles locales + LLM : règles pour les cas simples/fréquents, Claude pour les situations ambiguës — Validé en Phase 3
+- [x] Interface vocale et textuelle dans Home Assistant — Validé en Phase 4 (VOICE-01/02)
 
 ### Out of Scope
 
@@ -74,4 +74,4 @@ Ce document évolue à chaque transition de phase et jalons de milestone.
 4. Mettre à jour Context avec l'état actuel
 
 ---
-*Last updated: 2026-04-05 — Phase 5 complete (habit engine: AgentStorage SQLite WAL + HabitEngine state_changed listener + PatternDetector SQL GROUP BY)*
+*Last updated: 2026-04-05 — Phase 6 complete — Milestone v1.0 DONE (habit feedback loop: ClaudeClient habit injection + HabitNotifier persistent_notification, 102 tests passing)*
