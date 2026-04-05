@@ -49,7 +49,7 @@ class PatternDetector:
     def __init__(self, storage: "AgentStorage") -> None:
         self._storage = storage
 
-    async def async_detect(self) -> list[dict]:
+    async def async_detect_patterns(self) -> list[dict]:
         """Run pattern detection and upsert results into the patterns table.
 
         Returns:
@@ -79,3 +79,13 @@ class PatternDetector:
             _LOGGER.debug("PatternDetector: no patterns above threshold (%d)", PATTERN_MIN_COUNT)
 
         return patterns
+
+    async def async_get_patterns(self) -> list[dict]:
+        """Return all stored patterns from the patterns table."""
+        assert self._storage._db is not None, "Storage not open"
+        async with self._storage._db.execute(
+            "SELECT * FROM patterns ORDER BY occurrences DESC"
+        ) as cursor:
+            rows = await cursor.fetchall()
+            col_names = [desc[0] for desc in cursor.description]
+        return [dict(zip(col_names, row)) for row in rows]

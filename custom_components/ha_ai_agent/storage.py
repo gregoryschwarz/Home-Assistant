@@ -145,6 +145,7 @@ class AgentStorage:
             ),
         )
         await self._db.commit()
+        await self.async_enforce_cap()
 
     # ------------------------------------------------------------------
     # Maintenance

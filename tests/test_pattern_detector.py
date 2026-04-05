@@ -4,7 +4,7 @@ Covers:
   - Pattern detected when COUNT(*) >= 3 in last 14 days (D-03)
   - No pattern when COUNT(*) < 3 (below threshold)
   - Pattern groups correctly on entity_id + service + day_of_week + hour (D-04)
-  - async_detect() returns list of pattern dicts
+  - async_detect_patterns() returns list of pattern dicts
   - Detected patterns are upserted into patterns table via storage
   - Events outside 14-day window don't count toward threshold
 """
@@ -65,7 +65,7 @@ async def test_pattern_detected_at_threshold(storage) -> None:
     await _insert_events(storage, "light.salon", "light", "turn_on", 0, 7, count=3)
 
     detector = PatternDetector(storage)
-    patterns = await detector.async_detect()
+    patterns = await detector.async_detect_patterns()
 
     assert len(patterns) == 1
     p = patterns[0]
@@ -83,7 +83,7 @@ async def test_no_pattern_below_threshold(storage) -> None:
     await _insert_events(storage, "light.salon", "light", "turn_on", 0, 7, count=2)
 
     detector = PatternDetector(storage)
-    patterns = await detector.async_detect()
+    patterns = await detector.async_detect_patterns()
 
     assert patterns == [], f"Expected no patterns, got {patterns}"
 
@@ -100,7 +100,7 @@ async def test_pattern_groups_correctly(storage) -> None:
     await _insert_events(storage, "light.salon", "light", "turn_off", 0, 23, count=2)
 
     detector = PatternDetector(storage)
-    patterns = await detector.async_detect()
+    patterns = await detector.async_detect_patterns()
 
     entity_ids = {p["entity_id"] for p in patterns}
     assert "light.salon" in entity_ids
@@ -118,19 +118,19 @@ async def test_old_events_outside_window_excluded(storage) -> None:
     await _insert_events(storage, "light.salon", "light", "turn_on", 0, 7, count=1, days_ago=0)
 
     detector = PatternDetector(storage)
-    patterns = await detector.async_detect()
+    patterns = await detector.async_detect_patterns()
 
     assert patterns == [], f"Old events must not contribute to threshold: {patterns}"
 
 
 async def test_patterns_upserted_to_table(storage) -> None:
-    """async_detect() must upsert detected patterns into the patterns table."""
+    """async_detect_patterns() must upsert detected patterns into the patterns table."""
     from custom_components.ha_ai_agent.pattern_detector import PatternDetector
 
     await _insert_events(storage, "light.salon", "light", "turn_on", 0, 7, count=3)
 
     detector = PatternDetector(storage)
-    await detector.async_detect()
+    await detector.async_detect_patterns()
 
     async with storage._db.execute("SELECT * FROM patterns") as cursor:
         rows = await cursor.fetchall()
@@ -143,11 +143,11 @@ async def test_patterns_upserted_to_table(storage) -> None:
 
 
 async def test_pattern_detect_returns_list(storage) -> None:
-    """async_detect() must always return a list (empty if no patterns)."""
+    """async_detect_patterns() must always return a list (empty if no patterns)."""
     from custom_components.ha_ai_agent.pattern_detector import PatternDetector
 
     detector = PatternDetector(storage)
-    result = await detector.async_detect()
+    result = await detector.async_detect_patterns()
 
     assert isinstance(result, list)
 
@@ -159,7 +159,7 @@ async def test_multiple_events_same_slot(storage) -> None:
     await _insert_events(storage, "switch.fan", "switch", "turn_on", 5, 8, count=5)
 
     detector = PatternDetector(storage)
-    patterns = await detector.async_detect()
+    patterns = await detector.async_detect_patterns()
 
     assert len(patterns) == 1
     assert patterns[0]["occurrences"] == 5

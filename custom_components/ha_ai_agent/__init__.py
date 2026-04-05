@@ -48,8 +48,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     }
 
     # Teardown — close storage and stop habit engine on unload (HA-03)
-    entry.async_on_unload(storage.async_close)
     entry.async_on_unload(habit_engine.async_stop)
+    entry.async_on_unload(storage.async_close)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
