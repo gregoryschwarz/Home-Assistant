@@ -8,9 +8,11 @@ DEFAULT_ALLOWED_DOMAINS: list[str] = ["light", "switch", "climate", "media_playe
 
 MAX_HISTORY_TURNS = 10
 
+# Habit engine constants (Phase 5)
 DB_FILENAME = "ha_ai_agent_habits.db"
 HABIT_TTL_DAYS = 90
-HABIT_EVENT_CAP = 10_000
+HABIT_CAP = 10_000
+HABIT_SCHEMA_VERSION = 1
 
 SYSTEM_PROMPT = (
     "Tu es un assistant domotique Home Assistant. "

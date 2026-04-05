@@ -163,10 +163,10 @@ async def test_purge_old_events(storage) -> None:
 @pytest.mark.asyncio
 async def test_enforce_cap(storage) -> None:
     """async_enforce_cap keeps only the 10000 newest events when exceeded."""
-    from custom_components.ha_ai_agent.const import HABIT_EVENT_CAP
+    from custom_components.ha_ai_agent.const import HABIT_CAP
 
-    # Insert HABIT_EVENT_CAP + 5 events
-    total = HABIT_EVENT_CAP + 5
+    # Insert HABIT_CAP + 5 events
+    total = HABIT_CAP + 5
     ts = datetime.now(timezone.utc).isoformat()
     rows = [
         (f"light.e{i}", "light", "turn_on", ts, 0, 7, "[]", None)
@@ -184,8 +184,8 @@ async def test_enforce_cap(storage) -> None:
     async with storage._db.execute("SELECT COUNT(*) FROM events") as cursor:
         count_row = await cursor.fetchone()
     count = count_row[0]
-    assert count == HABIT_EVENT_CAP, (
-        f"Expected exactly {HABIT_EVENT_CAP} events after cap, got {count}"
+    assert count == HABIT_CAP, (
+        f"Expected exactly {HABIT_CAP} events after cap, got {count}"
     )
 
     # Verify the oldest 5 were removed (entity_id light.e0..light.e4 gone)
