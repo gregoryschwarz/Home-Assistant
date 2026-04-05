@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: "Checkpoint: 04-01 Task 2 — awaiting human HA pipeline verification"
-last_updated: "2026-04-05T08:31:31.452Z"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-04-05T09:11:23.581Z"
 last_activity: 2026-04-05
 progress:
   total_phases: 6
@@ -61,6 +61,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 03-claude-llm-integration P01 | 3min | 2 tasks | 4 files |
 | Phase 03-claude-llm-integration P02 | 2min | 2 tasks | 3 files |
 | Phase 04-voice-pipeline P01 | 3min | 1 tasks | 2 files |
+| Phase 04-voice-pipeline P01 | 35min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,8 @@ Recent decisions affecting current work:
 - [Phase 03-claude-llm-integration]: Test input changed from 'joue de la guitare' to 'mets l ambiance pour un film' — joue matches MEDIA_RE
 - [Phase 04-voice-pipeline]: No new component code needed for Phase 4: HaAiConversationAgent already pipeline-compatible via async_set_speech and IntentResponse
 - [Phase 04-voice-pipeline]: IntentRouter.async_route patched at module level (not __init__) for voice pipeline tests — avoids module injection complexity
+- [Phase 04-voice-pipeline]: No new Python code needed for Phase 4: HaAiConversationAgent already pipeline-compatible via async_set_speech and IntentResponse
+- [Phase 04-voice-pipeline]: IntentRouter.async_route patched at module level (not __init__) for voice pipeline tests — avoids module injection complexity
 
 ### Pending Todos
 
@@ -105,6 +108,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-05T08:31:31.449Z
-Stopped at: Checkpoint: 04-01 Task 2 — awaiting human HA pipeline verification
+Last session: 2026-04-05T09:11:23.577Z
+Stopped at: Completed 04-01-PLAN.md
 Resume file: None

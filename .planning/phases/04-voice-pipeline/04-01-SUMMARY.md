@@ -14,7 +14,7 @@ provides:
   - Unit tests proving agent is pipeline-discoverable (VOICE-01)
   - Unit tests proving TTS-compatible speech output via IntentResponse (VOICE-02)
   - .gitignore excluding __pycache__ and build artifacts
-affects: [04-voice-pipeline]
+affects: [05-habitlearning, any phase touching voice or conversation pipeline]
 
 # Tech tracking
 tech-stack:
@@ -41,20 +41,20 @@ patterns-established:
 requirements-completed: [VOICE-01, VOICE-02]
 
 # Metrics
-duration: 8min
-completed: 2026-04-05
+duration: ~35min
+completed: 2026-04-04
 ---
 
 # Phase 4 Plan 01: Voice Pipeline Compatibility Summary
 
-**4 unit tests prove HaAiConversationAgent is discoverable by assist_pipeline (VOICE-01) and produces TTS-compatible IntentResponse speech output (VOICE-02) — zero new component code needed**
+**4 unit tests prove HaAiConversationAgent is discoverable by assist_pipeline (VOICE-01) and produces TTS-compatible IntentResponse speech output (VOICE-02) — zero new component code needed; live HA pipeline "Mon assistant HA" configured and verified end-to-end in French**
 
 ## Performance
 
-- **Duration:** 8 min
+- **Duration:** ~35 min
 - **Started:** 2026-04-05T08:27:40Z
-- **Completed:** 2026-04-05T08:35:00Z
-- **Tasks:** 1/2 complete (Task 2 is a human-verify checkpoint)
+- **Completed:** 2026-04-04T00:00:00Z
+- **Tasks:** 2/2 complete
 - **Files modified:** 2
 
 ## Accomplishments
@@ -63,16 +63,17 @@ completed: 2026-04-05
 - Confirmed existing HaAiConversationAgent requires zero modification for voice pipeline compatibility
 - All 45 tests pass (including 4 new); no regressions
 - Added `.gitignore` to exclude `__pycache__` and build artifacts (missing from project)
+- HA voice pipeline "Mon assistant HA" configured in live instance with STT=faster-whisper (fr), TTS=Piper (fr_FR-siwis-medium), conversation agent=HA AI Agent (conversation.ha_ai_agent)
+- WebSocket smoke test confirmed pipeline routes to conversation.ha_ai_agent and returns French speech responses — VOICE-01 and VOICE-02 verified end-to-end
 
 ## Task Commits
 
 Each task was committed atomically:
 
 1. **Task 1: Create voice pipeline unit tests** - `4156b49` (feat)
+2. **Task 2: Configure and verify HA voice pipeline end-to-end** - Human verification (approved — no code commit)
 
-**Plan metadata:** (pending — awaiting Task 2 checkpoint completion)
-
-_Note: Task 2 is a `checkpoint:human-verify` requiring HA UI pipeline configuration and end-to-end voice verification._
+**Plan metadata:** `b34be9f` (docs: complete voice pipeline plan)
 
 ## Files Created/Modified
 
@@ -107,24 +108,24 @@ _Note: Task 2 is a `checkpoint:human-verify` requiring HA UI pipeline configurat
 
 ## User Setup Required
 
-**Task 2 requires manual HA configuration.** The checkpoint below details the steps:
+**Task 2 (completed — human verified):** HA voice pipeline configured manually:
 
-1. Install Wyoming Whisper add-on (STT) — Settings > Add-ons > Add-on Store > "Whisper"
-2. Install Wyoming Piper add-on (TTS) — Settings > Add-ons > Add-on Store > "Piper"
-3. (Optional) Install openWakeWord add-on
-4. Create Assist pipeline named "Mon assistant HA" with:
+1. Wyoming Whisper add-on installed (STT, port 10300) — confirmed via Wyoming Protocol integration
+2. Wyoming Piper add-on installed (TTS, port 10200) — confirmed via Wyoming Protocol integration
+3. openWakeWord add-on installed (optional, wake word "alexa" — non-commercial use only)
+4. Assist pipeline "Mon assistant HA" created with:
    - Conversation agent: HA AI Agent (entity `conversation.ha_ai_agent`)
    - STT: faster-whisper, language fr
    - TTS: Piper, voice `fr_FR-siwis-medium`
-   - Wake word: openWakeWord/alexa (optional, non-commercial)
-5. Verify via WebSocket: `assist_pipeline/pipeline/list` shows `conversation_engine: "conversation.ha_ai_agent"`
-6. Smoke test: `assist_pipeline/run` with `start_stage: "intent"` returns `intent-end` with speech text
+   - Wake word: openWakeWord/alexa
+5. WebSocket verified: `assist_pipeline/pipeline/list` shows `conversation_engine: "conversation.ha_ai_agent"`
+6. Smoke test passed: `assist_pipeline/run` returns `intent-end` with French speech text
 
 ## Next Phase Readiness
 
-- VOICE-01 and VOICE-02 proven by automated tests — no blockers on the code side
-- Task 2 (pipeline configuration) awaits human verification in HA UI
-- Once Task 2 is verified, Phase 4 Plan 01 is complete and Phase 4 is done
+- VOICE-01 and VOICE-02 fully satisfied — proven by both automated tests and live HA end-to-end verification
+- Voice pipeline "Mon assistant HA" operational: French voice commands processed by HaAiConversationAgent with TTS responses
+- Phase 04 complete — Phase 05 (habit learning) can proceed without any voice pipeline blockers
 
 ## Self-Check: PASSED
 
@@ -132,7 +133,8 @@ _Note: Task 2 is a `checkpoint:human-verify` requiring HA UI pipeline configurat
 - FOUND: `.gitignore`
 - FOUND: `.planning/phases/04-voice-pipeline/04-01-SUMMARY.md`
 - FOUND: commit `4156b49`
+- FOUND: commit `b34be9f`
 
 ---
 *Phase: 04-voice-pipeline*
-*Completed: 2026-04-05 (Task 1 complete; Task 2 pending human verification)*
+*Completed: 2026-04-04*
