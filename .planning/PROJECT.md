@@ -19,6 +19,7 @@ Permettre de contrôler et d'automatiser sa maison en langage naturel sans confi
 ### Active
 
 - [x] Commandes vocales pour contrôler les entités Home Assistant via pipeline assist_pipeline — Validé en Phase 4 (VOICE-01, VOICE-02)
+- [x] Observation et persistance des événements home en SQLite local — Validé en Phase 5 (HABIT-01, HABIT-02, HABIT-03, SEC-02)
 - [ ] Apprentissage des habitudes : l'agent observe et mémorise les routines pour les suggérer ou les appliquer automatiquement
 - [ ] Intégration comme custom component HA (dossier `custom_components/`)
 - [ ] Utilisation de l'API Claude (Anthropic) pour l'interprétation des intentions complexes
@@ -73,4 +74,4 @@ Ce document évolue à chaque transition de phase et jalons de milestone.
 4. Mettre à jour Context avec l'état actuel
 
 ---
-*Last updated: 2026-04-05 — Phase 4 complete (voice pipeline: STT faster-whisper + TTS Piper + HA AI Agent via assist_pipeline)*
+*Last updated: 2026-04-05 — Phase 5 complete (habit engine: AgentStorage SQLite WAL + HabitEngine state_changed listener + PatternDetector SQL GROUP BY)*
