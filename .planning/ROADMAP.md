@@ -96,7 +96,7 @@ Plans:
 
 Plans:
 - [x] 05-01: AgentStorage with aiosqlite, WAL mode, schema versioning (meta table), TTL purge, and 10,000-event cap
-- [ ] 05-02: HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
+- [x] 05-02: HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
 - [ ] 05-03: Pattern detection algorithm (time-series frequency analysis over events table) and patterns table storage
 
 ### Phase 6: Habit Feedback Loop
@@ -123,5 +123,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Conversation Bridge | 3/3 | Complete   | 2026-03-31 |
 | 3. Claude LLM Integration | 3/3 | Complete   | 2026-04-01 |
 | 4. Voice Pipeline | 0/1 | Not started | - |
-| 5. Habit Engine | 1/3 | In progress | - |
+| 5. Habit Engine | 2/3 | In Progress|  |
 | 6. Habit Feedback Loop | 0/2 | Not started | - |
