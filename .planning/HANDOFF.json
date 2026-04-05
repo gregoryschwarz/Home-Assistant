@@ -1,39 +1,42 @@
 {
   "version": "1.0",
-  "timestamp": "2026-04-01T11:17:04.069Z",
-  "phase": "03",
-  "phase_name": "claude-llm-integration",
-  "phase_dir": ".planning/phases/03-claude-llm-integration",
-  "plan": 3,
-  "task": "human-uat",
-  "total_tasks": "human-uat",
-  "status": "awaiting_human_verification",
+  "timestamp": "2026-04-05T15:17:08.908Z",
+  "phase": "06",
+  "phase_name": "Habit Feedback Loop",
+  "phase_dir": ".planning/phases/06-habit-feedback-loop",
+  "plan": null,
+  "task": null,
+  "total_tasks": null,
+  "status": "paused",
   "completed_tasks": [
-    {"id": "03-01", "name": "ClaudeClient async wrapper + lifecycle wiring", "status": "done", "commit": "baffab6"},
-    {"id": "03-03", "name": "EntityContextBuilder.list_entities_for_llm", "status": "done", "commit": "a9dc698"},
-    {"id": "03-02", "name": "IntentRouter None sentinel + conversation.py LLM fallback", "status": "done", "commit": "75f7a8f"},
-    {"id": "verification", "name": "Automated verification 10/10 + UAT file creation", "status": "done", "commit": "d950ba4"}
+    {"id": "phase-04", "name": "Voice Pipeline — pipeline vocal + tests (VOICE-01, VOICE-02)", "status": "done", "commit": "4df37b5"},
+    {"id": "phase-05", "name": "Habit Engine — AgentStorage + HabitEngine + PatternDetector (HABIT-01/02/03/SEC-02)", "status": "done", "commit": "e04d130"},
+    {"id": "context-06", "name": "discuss-phase 6 — CONTEXT.md créé avec toutes décisions", "status": "done", "commit": "3052bd1"}
   ],
   "remaining_tasks": [
-    {"id": "human-uat-1", "name": "Test commande complexe sur HA réel", "status": "not_started"},
-    {"id": "human-uat-2", "name": "Vérifier payload filtrage (logs DEBUG)", "status": "not_started"},
-    {"id": "human-uat-3", "name": "Tester fallback 401 clé invalide", "status": "not_started"},
-    {"id": "human-uat-4", "name": "Inspecter trafic réseau sortant", "status": "not_started"},
-    {"id": "update-roadmap", "name": "Marquer phase 3 complète + PROJECT.md", "status": "blocked_on_human_uat"}
+    {"id": "plan-06", "name": "plan-phase 6 — créer PLAN.md (06-01 injection habits, 06-02 notifications)", "status": "not_started"},
+    {"id": "execute-06", "name": "execute-phase 6 — implémenter + vérifier", "status": "not_started"}
   ],
-  "blockers": [
-    {"description": "Vérification humaine sur instance HA réelle requise avant de marquer la phase complète", "type": "human_action", "workaround": "Répondre 'approved' si tests OK, ou signaler problèmes pour gap closure"}
-  ],
+  "blockers": [],
   "human_actions_pending": [
-    {"action": "Tester les 4 items dans 03-HUMAN-UAT.md sur instance HA réelle avec vraie clé API Claude", "context": "10/10 automated checks passed, human testing required for live HA interaction", "blocking": true}
+    {
+      "action": "Créer la PR sur GitHub avec les changements Phase 4 + Phase 5 + Phase 6 context",
+      "context": "Branche claude/funny-lichterman poussée sur origin. URL: https://github.com/gregoryschwarz/Home-Assistant/compare/master...claude/funny-lichterman",
+      "blocking": false
+    },
+    {
+      "action": "Investiguer wake word 'ok nabu' (openWakeWord non découvert par HA)",
+      "context": "openWakeWord installé et démarré mais ne s'enregistre pas comme intégration Wyoming. Port 10400/10700 échec connexion. Problème réseau inter-containers. Non bloquant pour Phase 6.",
+      "blocking": false
+    }
   ],
   "decisions": [
-    {"decision": "AsyncAnthropic timeout=10.0, max_retries=0", "rationale": "Contrôle exact du retry via boucle manuelle (D-04/D-07)", "phase": "03"},
-    {"decision": "Historique texte uniquement (pas de blocs content bruts)", "rationale": "Évite conflit tool_use/tool_result sur tours suivants", "phase": "03"},
-    {"decision": "async_route retourne None sentinel", "rationale": "Conversation.py contrôle le wording du fallback, router reste stateless", "phase": "03"},
-    {"decision": "Test input 'mets l ambiance pour un film' au lieu de 'joue de la guitare'", "rationale": "'joue' correspond à MEDIA_RE — input non représentatif du cas LLM fallback", "phase": "03"}
+    {"decision": "Habits injectées filtrées par entité mentionnée + heure ±2h", "rationale": "Contexte ciblé, moins de tokens Claude", "phase": "06"},
+    {"decision": "Injection dans message utilisateur via async_complete(text, entities, habits=None)", "rationale": "Rétrocompatible, pas de modification SYSTEM_PROMPT (D-17 Phase 3)", "phase": "06"},
+    {"decision": "Anti-spam 1 notification/pattern/24h, tracking en mémoire", "rationale": "Évite le flood, pas besoin de persistance v1", "phase": "06"},
+    {"decision": "persistent_notification avec notification_id unique + suggestion textuelle 'Créer une automatisation ?'", "rationale": "Simple, pas de bouton (limitation HA persistent_notification)", "phase": "06"}
   ],
   "uncommitted_files": [],
-  "next_action": "Tester sur instance HA réelle les 4 items dans 03-HUMAN-UAT.md. Répondre 'approved' pour déclencher mise à jour ROADMAP et passage Phase 4.",
-  "context_notes": "Phase 3 code-complete. 3 plans exécutés en 2 vagues (worktrees isolés, merge dans master). Vérification auto 10/10. Bloqué uniquement sur approbation humaine UAT avant de marquer phase complète."
+  "next_action": "Lancer /gsd:plan-phase 6 pour créer les PLAN.md (06-01 injection habits dans ClaudeClient, 06-02 notifications HA proactives)",
+  "context_notes": "Phase 6 est la dernière phase du milestone v1.0. CONTEXT.md complet. Phases 4 et 5 complètes et vérifiées (79 tests passent). Branche poussée sur GitHub. async_complete est dans claude_client.py avec signature (text, entities) à étendre avec habits=None. pattern_detector accessible via hass.data[DOMAIN][entry_id]['pattern_detector']."
 }
