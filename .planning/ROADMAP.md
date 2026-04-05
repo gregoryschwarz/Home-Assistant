@@ -63,7 +63,7 @@ Plans:
   2. Only the filtered list of relevant entities (not all HA states) is sent to the Claude API
   3. Claude API failures fall back gracefully to local rules with a clear user-facing message
   4. Raw habit data and full entity state dumps never leave the local network to Anthropic
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [x] 03-01: ClaudeClient async wrapper with AsyncAnthropic, system prompt, conversation history window, and retry logic
@@ -91,12 +91,12 @@ Plans:
   2. Each event record includes entity ID, action, timestamp, day of week, and available context (presence, weather)
   3. After sufficient data accumulates, the pattern detector identifies recurring routines (e.g., kitchen lights on at 7 AM on weekdays)
   4. Habit data never leaves the device — no sync, no cloud, no external write
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 05-01: AgentStorage with aiosqlite, WAL mode, schema versioning (meta table), TTL purge, and 10,000-event cap
-- [ ] 05-02: HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
-- [ ] 05-03: Pattern detection algorithm (time-series frequency analysis over events table) and patterns table storage
+- [ ] 05-01-PLAN.md — AgentStorage with aiosqlite, WAL mode, schema versioning (meta table), TTL purge, and 10,000-event cap
+- [ ] 05-02-PLAN.md — HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
+- [ ] 05-03-PLAN.md — Pattern detection algorithm (time-series frequency analysis over events table) and patterns table storage
 
 ### Phase 6: Habit Feedback Loop
 **Goal**: Detected habits enrich Claude's context and surface as actionable suggestions in HA notifications
@@ -105,7 +105,7 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Claude's responses reflect known user routines (e.g., "I see you usually turn on the kitchen lights at 7 AM — done")
   2. Detected habit patterns appear as persistent notifications in HA suggesting automations or routines
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 - [ ] 06-01: Habit context injection into ClaudeClient system prompt (relevant habits keyed by time/entity)
