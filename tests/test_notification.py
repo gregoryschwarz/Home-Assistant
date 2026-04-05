@@ -130,14 +130,14 @@ class TestHabitNotifier:
         notifier = HabitNotifier(hass)
         pattern = self._make_pattern()
 
-        # First call
+        # First call: use t=100000.0 (>86400) so (now - 0.0) >= _ANTI_SPAM_SECONDS
         with patch("custom_components.ha_ai_agent.notification.time") as mock_time:
-            mock_time.monotonic.return_value = 1000.0
+            mock_time.monotonic.return_value = 100_000.0
             await notifier.async_notify_new_patterns([pattern])
 
-        # Second call after 25h (> 86400s)
+        # Second call after 25h (> 86400s from first notification)
         with patch("custom_components.ha_ai_agent.notification.time") as mock_time:
-            mock_time.monotonic.return_value = 1000.0 + 86400 + 1
+            mock_time.monotonic.return_value = 100_000.0 + 86400 + 1
             await notifier.async_notify_new_patterns([pattern])
 
         # Both calls should have sent notifications
