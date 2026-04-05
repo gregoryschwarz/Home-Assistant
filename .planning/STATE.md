@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Phase 4 UI-SPEC approved
-last_updated: "2026-04-04T16:07:27.374Z"
-last_activity: 2026-04-01
+stopped_at: "Checkpoint: 04-01 Task 2 — awaiting human HA pipeline verification"
+last_updated: "2026-04-05T08:31:31.452Z"
+last_activity: 2026-04-05
 progress:
   total_phases: 6
-  completed_phases: 3
-  total_plans: 9
-  completed_plans: 9
+  completed_phases: 4
+  total_plans: 10
+  completed_plans: 10
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Contrôler et automatiser sa maison en langage naturel sans configuration technique, avec un agent qui s'améliore au fil du temps.
-**Current focus:** Phase 03 — claude-llm-integration
+**Current focus:** Phase 04 — voice-pipeline
 
 ## Current Position
 
-Phase: 03 (claude-llm-integration) — EXECUTING
-Plan: 3 of 3
+Phase: 04 (voice-pipeline) — EXECUTING
+Plan: 1 of 1
 Status: Phase complete — ready for verification
-Last activity: 2026-04-01
+Last activity: 2026-04-05
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -60,6 +60,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 03-claude-llm-integration P03 | 15 | 1 tasks | 2 files |
 | Phase 03-claude-llm-integration P01 | 3min | 2 tasks | 4 files |
 | Phase 03-claude-llm-integration P02 | 2min | 2 tasks | 3 files |
+| Phase 04-voice-pipeline P01 | 3min | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,8 @@ Recent decisions affecting current work:
 - [Phase 03-claude-llm-integration]: History stores text-only strings to avoid tool_use block / tool_result mismatch on next turn
 - [Phase 03-claude-llm-integration]: async_route returns None sentinel so conversation.py controls fallback wording — keeps router stateless
 - [Phase 03-claude-llm-integration]: Test input changed from 'joue de la guitare' to 'mets l ambiance pour un film' — joue matches MEDIA_RE
+- [Phase 04-voice-pipeline]: No new component code needed for Phase 4: HaAiConversationAgent already pipeline-compatible via async_set_speech and IntentResponse
+- [Phase 04-voice-pipeline]: IntentRouter.async_route patched at module level (not __init__) for voice pipeline tests — avoids module injection complexity
 
 ### Pending Todos
 
@@ -102,6 +105,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-04T16:07:27.358Z
-Stopped at: Phase 4 UI-SPEC approved
-Resume file: .planning/phases/04-voice-pipeline/04-UI-SPEC.md
+Last session: 2026-04-05T08:31:31.449Z
+Stopped at: Checkpoint: 04-01 Task 2 — awaiting human HA pipeline verification
+Resume file: None

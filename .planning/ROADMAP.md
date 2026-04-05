@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: HA Scaffold** - Custom component loads in HA with secure API key config and clean lifecycle (completed 2026-03-31)
 - [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
 - [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
-- [ ] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent
+- [x] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent (completed 2026-04-05)
 - [ ] **Phase 5: Habit Engine** - State changes observed, events stored in crash-safe SQLite, patterns detected
 - [ ] **Phase 6: Habit Feedback Loop** - Habit context enriches Claude responses and surfaces proactive suggestions
 
@@ -80,7 +80,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 04-01-PLAN.md — Unit tests for pipeline discoverability (VOICE-01) and TTS speech output (VOICE-02), plus human checkpoint for HA UI pipeline configuration and end-to-end verification
+- [x] 04-01-PLAN.md — Unit tests for pipeline discoverability (VOICE-01) and TTS speech output (VOICE-02), plus human checkpoint for HA UI pipeline configuration and end-to-end verification
 
 ### Phase 5: Habit Engine
 **Goal**: The component observes and persists home state change events in a crash-safe local database ready for pattern analysis
@@ -121,6 +121,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. HA Scaffold | 3/3 | Complete   | 2026-03-31 |
 | 2. Conversation Bridge | 3/3 | Complete   | 2026-03-31 |
 | 3. Claude LLM Integration | 3/3 | Complete   | 2026-04-01 |
-| 4. Voice Pipeline | 0/1 | Not started | - |
+| 4. Voice Pipeline | 1/1 | Complete   | 2026-04-05 |
 | 5. Habit Engine | 0/3 | Not started | - |
 | 6. Habit Feedback Loop | 0/2 | Not started | - |

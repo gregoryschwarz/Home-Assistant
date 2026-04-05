@@ -22,8 +22,8 @@
 
 ### Interface voix
 
-- [ ] **VOICE-01**: Les commandes vocales via le pipeline `assist_pipeline` de HA sont traitées par le composant
-- [ ] **VOICE-02**: La réponse textuelle de l'agent est transmise au moteur TTS de HA pour lecture audio
+- [x] **VOICE-01**: Les commandes vocales via le pipeline `assist_pipeline` de HA sont traitées par le composant
+- [x] **VOICE-02**: La réponse textuelle de l'agent est transmise au moteur TTS de HA pour lecture audio
 
 ### Apprentissage des habitudes
 
@@ -80,8 +80,8 @@
 | NLU-03 | Phase 3 | Complete |
 | NLU-04 | Phase 2 | Complete |
 | NLU-05 | Phase 2 | Complete |
-| VOICE-01 | Phase 4 | Pending |
-| VOICE-02 | Phase 4 | Pending |
+| VOICE-01 | Phase 4 | Complete |
+| VOICE-02 | Phase 4 | Complete |
 | HABIT-01 | Phase 5 | Pending |
 | HABIT-02 | Phase 5 | Pending |
 | HABIT-03 | Phase 5 | Pending |
