@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 06-habit-feedback-loop/06-02-PLAN.md
-last_updated: "2026-04-05T19:17:20.000Z"
+status: executing
+stopped_at: Completed 05-habit-engine/05-02-PLAN.md
+last_updated: "2026-04-05T19:23:01.598Z"
 last_activity: 2026-04-05
 progress:
   total_phases: 6
   completed_phases: 6
-  total_plans: 14
+  total_plans: 15
   completed_plans: 15
   percent: 0
 ---
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Contrôler et automatiser sa maison en langage naturel sans configuration technique, avec un agent qui s'améliore au fil du temps.
-**Current focus:** Phase 03 — claude-llm-integration
+**Current focus:** Phase 06 — habit-feedback-loop
 
 ## Current Position
 
-Phase: 6
+Phase: 06
 Plan: Not started
-Status: Phase complete — ready for verification
+Status: Executing Phase 06
 Last activity: 2026-04-05
 
 Progress: [░░░░░░░░░░] 0%
@@ -62,8 +62,6 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 03-claude-llm-integration P02 | 2min | 2 tasks | 3 files |
 | Phase 05-habit-engine P01 | 3 | 1 tasks | 4 files |
 | Phase 05-habit-engine P02 | 3min | 1 tasks | 2 files |
-| Phase 06 P01 | 4min | 3 tasks | 4 files |
-| Phase 06-habit-feedback-loop P02 | 7min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -99,12 +97,6 @@ Recent decisions affecting current work:
 - [Phase 05-habit-engine]: _get_persons_home returns None (not empty list) when no person.* entities: consistent with async_record_event list[str]|None contract
 - [Phase 05-habit-engine]: old_state=None events ignored: entity creation is not a user transition — avoids false positives on first HA load
 - [Phase 05-habit-engine]: TYPE_CHECKING guard for AgentStorage import in habit_engine.py: avoids circular import at runtime
-- [Phase 06]: SQLite strftime('%w') day_of_week 0=Sunday: _DOW_NAMES[0]='dimanche' aligns with Phase 5 storage
-- [Phase 06]: habits=[] and habits=None both suppress injection (if habits: guard) — D-02 Phase 6
-- [Phase 06]: try/except guard on pattern_detector.async_get_patterns(): habit DB errors never reach user
-- [Phase 06-habit-feedback-loop]: time.monotonic() for anti-spam: immune to clock changes, anti-spam base 0.0 requires now>86400 for first notification
-- [Phase 06-habit-feedback-loop]: try/except BLE001 wraps detect+notify block: notification failures never crash conversation flow (D-09)
-- [Phase 06-habit-feedback-loop]: HabitNotifier registered in hass.data['notifier']: follows existing service access pattern from conversation.py
 
 ### Pending Todos
 
@@ -118,6 +110,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-05T19:17:19.996Z
-Stopped at: Completed 06-habit-feedback-loop/06-02-PLAN.md
+Last session: 2026-04-05T14:36:21.671Z
+Stopped at: Completed 05-habit-engine/05-02-PLAN.md
 Resume file: None
