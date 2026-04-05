@@ -13,11 +13,11 @@ Six phases that follow a strict dependency chain: HA scaffold first (lifecycle a
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: HA Scaffold** - Custom component loads in HA with secure API key config and clean lifecycle (completed 2026-03-31)
-- [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
-- [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
+- [x] **Phase 2: Conversation Bridge** - Text commands control HA entities via local rules, no LLM required (completed 2026-03-31)
+- [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
 - [ ] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent
 - [ ] **Phase 5: Habit Engine** - State changes observed, events stored in crash-safe SQLite, patterns detected
-- [ ] **Phase 6: Habit Feedback Loop** - Habit context enriches Claude responses and surfaces proactive suggestions
+- [x] **Phase 6: Habit Feedback Loop** - Habit context enriches Claude responses and surfaces proactive suggestions (completed 2026-04-05)
 
 ## Phase Details
 
@@ -106,16 +106,16 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Claude's responses reflect known user routines (e.g., "I see you usually turn on the kitchen lights at 7 AM — done")
   2. Detected habit patterns appear as persistent notifications in HA suggesting automations or routines
-**Plans**: 2 plans
+**Plans**: TBD
 
 Plans:
-- [ ] 06-01-PLAN.md — Habit context injection into async_complete (habits param, entity/hour filtering in conversation.py)
-- [ ] 06-02-PLAN.md — Proactive HA persistent_notification via HabitNotifier with 24h anti-spam tracking
+- [x] 06-01: Habit context injection into ClaudeClient system prompt (relevant habits keyed by time/entity)
+- [ ] 06-02: Proactive suggestion delivery via HA persistent_notification service when new patterns are detected
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -124,4 +124,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 3. Claude LLM Integration | 3/3 | Complete   | 2026-04-01 |
 | 4. Voice Pipeline | 0/1 | Not started | - |
 | 5. Habit Engine | 2/3 | In Progress|  |
-| 6. Habit Feedback Loop | 0/2 | Not started | - |
+| 6. Habit Feedback Loop | 1/1 | Complete   | 2026-04-05 |

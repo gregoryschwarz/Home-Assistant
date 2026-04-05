@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 05-habit-engine/05-02-PLAN.md
-last_updated: "2026-04-05T15:02:59.293Z"
+stopped_at: Completed 06-habit-feedback-loop/06-01-PLAN.md
+last_updated: "2026-04-05T19:06:18.235Z"
 last_activity: 2026-04-05
 progress:
   total_phases: 6
-  completed_phases: 5
-  total_plans: 13
-  completed_plans: 13
+  completed_phases: 6
+  total_plans: 14
+  completed_plans: 14
   percent: 0
 ---
 
@@ -62,6 +62,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 03-claude-llm-integration P02 | 2min | 2 tasks | 3 files |
 | Phase 05-habit-engine P01 | 3 | 1 tasks | 4 files |
 | Phase 05-habit-engine P02 | 3min | 1 tasks | 2 files |
+| Phase 06 P01 | 4min | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -97,6 +98,9 @@ Recent decisions affecting current work:
 - [Phase 05-habit-engine]: _get_persons_home returns None (not empty list) when no person.* entities: consistent with async_record_event list[str]|None contract
 - [Phase 05-habit-engine]: old_state=None events ignored: entity creation is not a user transition — avoids false positives on first HA load
 - [Phase 05-habit-engine]: TYPE_CHECKING guard for AgentStorage import in habit_engine.py: avoids circular import at runtime
+- [Phase 06]: SQLite strftime('%w') day_of_week 0=Sunday: _DOW_NAMES[0]='dimanche' aligns with Phase 5 storage
+- [Phase 06]: habits=[] and habits=None both suppress injection (if habits: guard) — D-02 Phase 6
+- [Phase 06]: try/except guard on pattern_detector.async_get_patterns(): habit DB errors never reach user
 
 ### Pending Todos
 
@@ -110,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-05T14:36:21.671Z
-Stopped at: Completed 05-habit-engine/05-02-PLAN.md
+Last session: 2026-04-05T19:06:18.231Z
+Stopped at: Completed 06-habit-feedback-loop/06-01-PLAN.md
 Resume file: None

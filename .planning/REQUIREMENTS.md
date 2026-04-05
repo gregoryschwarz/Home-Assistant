@@ -30,7 +30,7 @@
 - [x] **HABIT-01**: Le composant écoute les changements d'état HA et stocke les événements en base SQLite locale
 - [x] **HABIT-02**: Les données collectées contiennent : entité, action, heure, jour de semaine, contexte (présence, météo si disponible)
 - [ ] **HABIT-03**: Le moteur de patterns détecte les habitudes récurrentes (ex: "allume la cuisine tous les matins à 7h")
-- [ ] **HABIT-04**: Les habitudes détectées enrichissent le contexte envoyé à Claude pour des réponses plus pertinentes
+- [x] **HABIT-04**: Les habitudes détectées enrichissent le contexte envoyé à Claude pour des réponses plus pertinentes
 
 ### Sécurité et vie privée
 
@@ -85,7 +85,7 @@
 | HABIT-01 | Phase 5 | Complete |
 | HABIT-02 | Phase 5 | Complete |
 | HABIT-03 | Phase 5 | Pending |
-| HABIT-04 | Phase 6 | Pending |
+| HABIT-04 | Phase 6 | Complete |
 | SEC-01 | Phase 3 | Complete |
 | SEC-02 | Phase 5 | Complete |
 | SEC-03 | Phase 2 | Complete |
