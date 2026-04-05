@@ -110,7 +110,7 @@ Plans:
 
 Plans:
 - [x] 06-01: Habit context injection into ClaudeClient system prompt (relevant habits keyed by time/entity)
-- [ ] 06-02: Proactive suggestion delivery via HA persistent_notification service when new patterns are detected
+- [x] 06-02: Proactive suggestion delivery via HA persistent_notification service when new patterns are detected
 
 ## Progress
 
@@ -124,4 +124,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Claude LLM Integration | 3/3 | Complete   | 2026-04-01 |
 | 4. Voice Pipeline | 0/1 | Not started | - |
 | 5. Habit Engine | 2/3 | In Progress|  |
-| 6. Habit Feedback Loop | 1/1 | Complete   | 2026-04-05 |
+| 6. Habit Feedback Loop | 2/1 | Complete   | 2026-04-05 |
