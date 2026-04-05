@@ -9,6 +9,7 @@ from .const import CONF_ALLOWED_DOMAINS, CONF_API_KEY, DEFAULT_ALLOWED_DOMAINS, 
 from .entity_context import EntityContextBuilder
 from .habit_engine import HabitEngine
 from .intent_router import IntentRouter
+from .notification import HabitNotifier
 from .pattern_detector import PatternDetector
 from .storage import AgentStorage
 
@@ -36,6 +37,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await habit_engine.async_start()
 
     pattern_detector = PatternDetector(storage)
+    notifier = HabitNotifier(hass)
 
     hass.data[DOMAIN][entry.entry_id] = {
         "entry": entry,
@@ -45,6 +47,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "storage": storage,
         "habit_engine": habit_engine,
         "pattern_detector": pattern_detector,
+        "notifier": notifier,
     }
 
     # Teardown — close storage and stop habit engine on unload (HA-03)

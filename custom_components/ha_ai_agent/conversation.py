@@ -23,6 +23,7 @@ Phase 6 additions:
 from __future__ import annotations
 
 import datetime
+import logging
 
 from homeassistant.components.conversation import (
     AssistantContent,
@@ -38,6 +39,8 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
 from .intent_router import IntentRouter
+
+_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
@@ -150,6 +153,15 @@ class HaAiConversationAgent(ConversationEntity):
             response_text = await claude_client.async_complete(
                 user_input.text, entities, habits=relevant_habits or None
             )
+            # D-09: detect patterns and notify on new ones (after async_complete, LLM path only)
+            if pattern_detector is not None:
+                try:
+                    detected = await pattern_detector.async_detect_patterns()
+                    notifier = entry_data.get("notifier")
+                    if notifier is not None and detected:
+                        await notifier.async_notify_new_patterns(detected)
+                except Exception:  # noqa: BLE001 — never let notification failure break the flow
+                    _LOGGER.debug("Pattern detection/notification failed", exc_info=True)
             # D-03: if Claude also returns None, final fallback
             if response_text is None:
                 response_text = "Je n'ai pas compris la commande."
