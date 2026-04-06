@@ -3,6 +3,10 @@
 Implements D-04 (1 retry with 1s backoff), D-07 (10s timeout),
 D-08 (sliding window history), D-11 (domain validation),
 D-18/D-19 (French error strings), D-20 (no re-raised exceptions).
+
+Phase 6 additions:
+  - async_complete gains optional habits param (D-03/D-04/D-05 from Phase 6 CONTEXT)
+  - Relevant habits injected as "Habitudes connues" block after entity list
 """
 from __future__ import annotations
 
@@ -48,10 +52,33 @@ class ClaudeClient:
         )
         self._history: deque = deque(maxlen=MAX_HISTORY_TURNS)  # D-08
 
+    # French day names indexed by ISO weekday (0=Monday … 6=Sunday) matching
+    # the day_of_week field stored in the patterns table (strftime('%w', ...) = 0 Sunday).
+    # Phase 5 uses SQLite strftime('%w') which is 0=Sunday, 1=Monday … 6=Saturday.
+    _DOW_NAMES: list[str] = [
+        "dimanche",  # 0 — SQLite %w: Sunday
+        "lundi",     # 1
+        "mardi",     # 2
+        "mercredi",  # 3
+        "jeudi",     # 4
+        "vendredi",  # 5
+        "samedi",    # 6
+    ]
+
     async def async_complete(
-        self, text: str, entities: list[dict]
+        self,
+        text: str,
+        entities: list[dict],
+        habits: "list[dict] | None" = None,
     ) -> str | None:
-        """Call Claude API with the user text and entity list.
+        """Call Claude API with the user text, entity list, and optional habits.
+
+        Args:
+            text: User command text.
+            entities: List of dicts with keys entity_id, friendly_name, state.
+            habits: Optional list of pattern dicts (D-04). Each dict must have
+                entity_id, service, day_of_week, hour, occurrences keys.
+                If None or empty, no habits block is injected (D-02).
 
         Returns a French string (action confirmation, free text, or error).
         Never raises — all errors are converted to French strings (D-20).
@@ -65,6 +92,23 @@ class ClaudeClient:
             user_content = f"{text}\n\nEntites disponibles:\n{entity_list_str}"
         else:
             user_content = text
+
+        # Inject habits block if relevant habits provided (D-05 Phase 6)
+        if habits:
+            habit_lines = []
+            for h in habits:
+                dow = int(h.get("day_of_week", 0))
+                day_name = self._DOW_NAMES[dow % 7]
+                hour = int(h.get("hour", 0))
+                occurrences = int(h.get("occurrences", 0))
+                entity_id = h.get("entity_id", "")
+                service = h.get("service", "")
+                habit_lines.append(
+                    f"- {entity_id} {service} le {day_name} a {hour}h"
+                    f" ({occurrences} fois en 14 jours)"
+                )
+            habits_block = "Habitudes connues (contexte personnel) :\n" + "\n".join(habit_lines)
+            user_content = f"{user_content}\n\n{habits_block}"
 
         self._history.append({"role": "user", "content": user_content})
 

@@ -1,4 +1,4 @@
-"""Shared fixtures for Phase 1 tests."""
+"""Shared fixtures for Phase 1–5 tests."""
 from __future__ import annotations
 
 import asyncio
@@ -11,6 +11,7 @@ from homeassistant.setup import async_setup_component
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.ha_ai_agent.const import CONF_API_KEY, DOMAIN
+from custom_components.ha_ai_agent.storage import AgentStorage
 
 # Windows: use SelectorEventLoop so pytest-socket does not block internal socket pairs
 if sys.platform == "win32":
@@ -56,3 +57,14 @@ async def mock_config_entry(hass: HomeAssistant, enable_custom_integrations) -> 
     )
     entry.add_to_hass(hass)
     return entry
+
+
+@pytest.fixture
+async def tmp_storage(tmp_path):
+    """Create an AgentStorage backed by a tmp_path database for Phase 5 tests."""
+    storage = AgentStorage.__new__(AgentStorage)
+    storage._db = None
+    storage._db_path = str(tmp_path / "test_habits.db")
+    await storage.async_open()
+    yield storage
+    await storage.async_close()

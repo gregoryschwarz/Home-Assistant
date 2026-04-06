@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 03-claude-llm-integration/03-02-PLAN.md
-last_updated: "2026-04-01T11:07:04.909Z"
-last_activity: 2026-04-01
+status: executing
+stopped_at: Completed 05-habit-engine/05-02-PLAN.md
+last_updated: "2026-04-05T19:23:01.598Z"
+last_activity: 2026-04-05
 progress:
   total_phases: 6
-  completed_phases: 3
-  total_plans: 9
-  completed_plans: 9
+  completed_phases: 6
+  total_plans: 15
+  completed_plans: 15
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** Contrôler et automatiser sa maison en langage naturel sans configuration technique, avec un agent qui s'améliore au fil du temps.
-**Current focus:** Phase 03 — claude-llm-integration
+**Current focus:** Phase 06 — habit-feedback-loop
 
 ## Current Position
 
-Phase: 03 (claude-llm-integration) — EXECUTING
-Plan: 3 of 3
-Status: Phase complete — ready for verification
-Last activity: 2026-04-01
+Phase: 06
+Plan: Not started
+Status: Executing Phase 06
+Last activity: 2026-04-05
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -60,6 +60,8 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 03-claude-llm-integration P03 | 15 | 1 tasks | 2 files |
 | Phase 03-claude-llm-integration P01 | 3min | 2 tasks | 4 files |
 | Phase 03-claude-llm-integration P02 | 2min | 2 tasks | 3 files |
+| Phase 05-habit-engine P01 | 3 | 1 tasks | 4 files |
+| Phase 05-habit-engine P02 | 3min | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -89,6 +91,12 @@ Recent decisions affecting current work:
 - [Phase 03-claude-llm-integration]: History stores text-only strings to avoid tool_use block / tool_result mismatch on next turn
 - [Phase 03-claude-llm-integration]: async_route returns None sentinel so conversation.py controls fallback wording — keeps router stateless
 - [Phase 03-claude-llm-integration]: Test input changed from 'joue de la guitare' to 'mets l ambiance pour un film' — joue matches MEDIA_RE
+- [Phase 05-habit-engine]: AgentStorage.__new__ + _db_path injection: allows tests to bypass hass dependency without mock
+- [Phase 05-habit-engine]: async_enforce_cap called inside async_record_event: FIFO cap enforced atomically after every insert
+- [Phase 05-habit-engine]: WAL mode activated in async_open on every reconnection per SQLite persistence docs
+- [Phase 05-habit-engine]: _get_persons_home returns None (not empty list) when no person.* entities: consistent with async_record_event list[str]|None contract
+- [Phase 05-habit-engine]: old_state=None events ignored: entity creation is not a user transition — avoids false positives on first HA load
+- [Phase 05-habit-engine]: TYPE_CHECKING guard for AgentStorage import in habit_engine.py: avoids circular import at runtime
 
 ### Pending Todos
 
@@ -102,6 +110,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-01T11:07:04.906Z
-Stopped at: Completed 03-claude-llm-integration/03-02-PLAN.md
+Last session: 2026-04-05T14:36:21.671Z
+Stopped at: Completed 05-habit-engine/05-02-PLAN.md
 Resume file: None

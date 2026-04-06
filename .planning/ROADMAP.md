@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Claude LLM Integration** - Complex commands handled by Claude with entity filtering and security controls (completed 2026-04-01)
 - [ ] **Phase 4: Voice Pipeline** - Wake word to TTS response end-to-end through the registered conversation agent
 - [ ] **Phase 5: Habit Engine** - State changes observed, events stored in crash-safe SQLite, patterns detected
-- [ ] **Phase 6: Habit Feedback Loop** - Habit context enriches Claude responses and surfaces proactive suggestions
+- [x] **Phase 6: Habit Feedback Loop** - Habit context enriches Claude responses and surfaces proactive suggestions (completed 2026-04-05)
 
 ## Phase Details
 
@@ -95,8 +95,8 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 05-01: AgentStorage with aiosqlite, WAL mode, schema versioning (meta table), TTL purge, and 10,000-event cap
-- [ ] 05-02: HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
+- [x] 05-01: AgentStorage with aiosqlite, WAL mode, schema versioning (meta table), TTL purge, and 10,000-event cap
+- [x] 05-02: HabitEngine subscribing to state_changed events with user-initiated filtering and event record writing
 - [ ] 05-03: Pattern detection algorithm (time-series frequency analysis over events table) and patterns table storage
 
 ### Phase 6: Habit Feedback Loop
@@ -109,8 +109,8 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 06-01: Habit context injection into ClaudeClient system prompt (relevant habits keyed by time/entity)
-- [ ] 06-02: Proactive suggestion delivery via HA persistent_notification service when new patterns are detected
+- [x] 06-01: Habit context injection into ClaudeClient system prompt (relevant habits keyed by time/entity)
+- [x] 06-02: Proactive suggestion delivery via HA persistent_notification service when new patterns are detected
 
 ## Progress
 
@@ -123,5 +123,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Conversation Bridge | 3/3 | Complete   | 2026-03-31 |
 | 3. Claude LLM Integration | 3/3 | Complete   | 2026-04-01 |
 | 4. Voice Pipeline | 0/1 | Not started | - |
-| 5. Habit Engine | 0/3 | Not started | - |
-| 6. Habit Feedback Loop | 0/2 | Not started | - |
+| 5. Habit Engine | 2/3 | In Progress|  |
+| 6. Habit Feedback Loop | 2/1 | Complete   | 2026-04-05 |
